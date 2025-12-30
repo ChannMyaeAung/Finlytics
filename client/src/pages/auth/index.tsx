@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   SignedIn,
   SignedOut,
@@ -11,8 +12,12 @@ export const Auth = () => {
   return (
     <div className="sign-in-container">
       <SignedOut>
-        <SignUpButton mode="modal" />
-        <SignInButton mode="modal" />
+        <Button variant={"outline"}>
+          <SignUpButton mode="modal" />
+        </Button>
+        <Button variant={"outline"}>
+          <SignInButton mode="modal" />
+        </Button>
       </SignedOut>
 
       <SignedIn>
