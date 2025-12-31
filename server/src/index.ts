@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import type { Express } from "express";
 import mongoose from "mongoose";
+import financialRecordRouter from "./routes/financial-record.ts";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 if (process.env.NODE_ENV === "development") {
@@ -10,9 +11,13 @@ if (process.env.NODE_ENV === "development") {
   dotenv.config({ path: ".env" });
 }
 
+// creates the application instance
+// exposes routing, middleware registration, and helpers for handling requests and responses
 const app: Express = express();
 const port = process.env.PORT || 5000;
 
+// adds built-in middleware function that parses incoming requests with JSON payloads
+// populates req.body with the parsed obj so we can access posted JSON data
 app.use(express.json());
 
 const mongoURI = process.env.MONGODB_URI ?? process.env.MONGO_URI;
@@ -25,6 +30,8 @@ mongoose
   .connect(mongoURI)
   .then(() => console.log("CONNECTED TO MONGODB Database"))
   .catch((err) => console.error(err));
+
+app.use("/financial-records", financialRecordRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
