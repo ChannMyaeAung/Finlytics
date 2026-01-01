@@ -17,12 +17,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useUser } from "@clerk/clerk-react";
+import { useFinancialRecords } from "@/context/financial-record-context";
 
 export const FinancialRecordForm = () => {
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const { records, addRecord } = useFinancialRecords();
 
   const { user } = useUser();
 
@@ -30,7 +32,7 @@ export const FinancialRecordForm = () => {
     e.preventDefault();
 
     const newRecord = {
-      userId: user?.id,
+      userId: user?.id ?? "",
       date: new Date(),
       description: description,
       amount: parseFloat(amount),
@@ -40,7 +42,7 @@ export const FinancialRecordForm = () => {
 
     console.log(newRecord);
 
-    // addRecord(newRecord);
+    addRecord(newRecord);
     setDescription("");
     setAmount("");
     setCategory("");

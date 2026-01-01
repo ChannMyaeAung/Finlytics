@@ -3,6 +3,7 @@ import express from "express";
 import type { Express } from "express";
 import mongoose from "mongoose";
 import financialRecordRouter from "./routes/financial-record.ts";
+import cors from "cors";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 if (process.env.NODE_ENV === "development") {
@@ -19,6 +20,7 @@ const port = process.env.PORT || 5000;
 // adds built-in middleware function that parses incoming requests with JSON payloads
 // populates req.body with the parsed obj so we can access posted JSON data
 app.use(express.json());
+app.use(cors());
 
 const mongoURI = process.env.MONGODB_URI ?? process.env.MONGO_URI;
 

@@ -1,0 +1,18 @@
+Info 0    [21:58:17.664] Starting TS Server
+Info 1    [21:58:17.664] Version: 5.9.3
+Info 2    [21:58:17.664] Arguments: C:\Program Files\nodejs\node.exe C:\Users\User\Desktop\FullStack\finlytics\server\node_modules\typescript\bin\tsserver --logVerbosity verbose --logFile tsserver.log
+Info 3    [21:58:17.664] Platform: win32 NodeVersion: v22.20.0 CaseSensitive: false
+Info 4    [21:58:17.664] ServerMode: undefined hasUnknownServerMode: undefined
+Info 5    [21:58:17.667] currentDirectory:: C:\Users\User\Desktop\FullStack\finlytics\server useCaseSensitiveFileNames:: false
+Info 6    [21:58:17.667] libs Location:: C:/Users/User/Desktop/FullStack/finlytics/server/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib
+Info 7    [21:58:17.668] globalTypingsCacheLocation:: C:/Users/User/AppData/Local/Microsoft/TypeScript/5.9
+Info 8    [21:58:17.669] Binding...
+Info 9    [21:58:17.674] event:
+    {
+      "seq": 0,
+      "type": "event",
+      "event": "typingsInstallerPid",
+      "body": {
+        "pid": 1216
+      }
+    }
