@@ -5,6 +5,7 @@ import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
 import { ThemeProvider } from "./components/theme-provider";
 import { FinancialRecordProvider } from "./context/financial-record-context";
+import HeroPage from "./pages/hero";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <Router>
         <div className="app-container">
           <Routes>
+            <Route path="/" element={<HeroPage />} />
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <FinancialRecordProvider>
                   <Dashboard />
