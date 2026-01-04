@@ -46,7 +46,7 @@ const Navbar = () => {
         <ModeToggle />
         <a
           href="/dashboard"
-          className="hidden sm:block px-6 py-2 bg-toshl-yellow text-toshl-dark font-bold rounded-full border-2 border-black transition-all shadow-sm uppercase text-xs tracking-wider"
+          className="hidden sm:block px-6 py-2 bg-toshl-yellow text-toshl-dark font-bold rounded-full border-2 border-black transition-all  shadow-sm uppercase text-xs tracking-wider"
         >
           Log in
         </a>
