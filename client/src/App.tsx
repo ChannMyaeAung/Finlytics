@@ -5,15 +5,23 @@ import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
 import { ThemeProvider } from "./components/theme-provider";
 import { FinancialRecordProvider } from "./context/financial-record-context";
-import HeroPage from "./pages/hero";
+import Hero from "./pages/hero";
+import Navbar from "./components/navbar";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
-        <div className="app-container">
+        <div className="">
           <Routes>
-            <Route path="/" element={<HeroPage />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Navbar /> <Hero />
+                </>
+              }
+            />
             <Route
               path="/dashboard"
               element={
