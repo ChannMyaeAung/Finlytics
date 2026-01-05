@@ -7,18 +7,20 @@ import { ThemeProvider } from "./components/theme-provider";
 import { FinancialRecordProvider } from "./context/financial-record-context";
 import Hero from "./pages/hero";
 import Navbar from "./components/navbar";
+import BankConnections from "./pages/bank-connections";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <div className="">
+          <Navbar />
           <Routes>
             <Route
               path="/"
               element={
                 <>
-                  <Navbar /> <Hero />
+                  <Hero />
                 </>
               }
             />
@@ -30,6 +32,7 @@ function App() {
                 </FinancialRecordProvider>
               }
             />
+            <Route path="/bank-connections" element={<BankConnections />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </div>

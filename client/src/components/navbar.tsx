@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 import { NavLink } from "react-router-dom";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "./mode-toggle"; // Assuming you have this
 
 const menus = [
   { name: "Personal Finance App", link: "/" },
@@ -10,48 +10,48 @@ const menus = [
   { name: "Pricing", link: "/pricing" },
 ];
 
-const navLinkClasses = (isActive: boolean) =>
-  [
-    "pb-1 border-b-2 text-sm font-bold uppercase tracking-wider transition-colors duration-200 ",
-    isActive
-      ? "text-pink-500 border-pink-500"
-      : "text-toshl-gray border-transparent hover:text-toshl-dark hover:border-pink-200",
-  ].join(" ");
-
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between px-6 py-8 w-full z-50 relative border-b">
-      {/* Logo Area */}
-      <div className="flex items-center gap-2 cursor-pointer">
-        <span className="text-2xl font-bold tracking-tight text-toshl-dark">
-          Fin<span className="font-light">lytics</span>
-        </span>
-      </div>
+    <header className="sticky top-0 z-50 bg-white dark:bg-accent dark:border-0 border-b border-gray-100 h-18 w-full">
+      <div className="px-6 h-full flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center">
+          <span className="text-xl font-bold tracking-normal text-gray-900 dark:text-white">
+            Fin<span className="font-light">lytics</span>
+          </span>
+        </div>
 
-      {/* Desktop Links - Hidden on mobile */}
-      <div className="hidden md:flex items-center gap-8">
-        {menus.map((menu) => (
-          <NavLink
-            key={menu.name}
-            to={menu.link}
-            className={({ isActive }) => navLinkClasses(isActive)}
-            end={menu.link === "/"}
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-12 h-full">
+          {menus.map((menu) => (
+            <NavLink
+              key={menu.name}
+              to={menu.link}
+              end={menu.link === "/"}
+              className={({ isActive }) =>
+                `
+                nav-tab flex items-center h-full text-[11px] uppercase tracking-widest transition-colors
+                ${isActive ? "nav-tab--active " : "nav-tab--inactive "}
+                `
+              }
+            >
+              <span className="h-0 text-sm tracking-wider">{menu.name}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Actions */}
+        <div className="flex items-center gap-4">
+          <ModeToggle />
+          <a
+            href="/auth"
+            className="hidden sm:block px-6 py-2 bg-transparent font-bold rounded-full border border-black transition-all text-[11px] uppercase tracking-wider hover:border-pink-400 hover:text-pink-400 dark:border-white dark:hover:border-pink-400"
           >
-            {menu.name}
-          </NavLink>
-        ))}
+            Log in
+          </a>
+        </div>
       </div>
-
-      <div className="flex items-center gap-4">
-        <ModeToggle />
-        <a
-          href="/dashboard"
-          className="hidden sm:block px-6 py-2 bg-toshl-yellow text-toshl-dark font-bold rounded-full border-2 border-black transition-all  shadow-sm uppercase text-xs tracking-wider"
-        >
-          Log in
-        </a>
-      </div>
-    </nav>
+    </header>
   );
 };
 

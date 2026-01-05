@@ -10,7 +10,7 @@ import {
 
 export const Auth = () => {
   return (
-    <div className="sign-in-container">
+    <div className="sign-in-container w-full mx-auto flex items-center justify-center gap-4 py-10">
       <SignedOut>
         <Button variant={"outline"}>
           <SignUpButton mode="modal" />

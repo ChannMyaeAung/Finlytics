@@ -7,7 +7,6 @@ export const Dashboard = () => {
   const { user } = useUser();
   return (
     <>
-      <Navbar />
       <div className="w-full max-w-5xl mx-auto p-4 space-y-6">
         <h1>Welcome {user?.firstName}! Here Are Your Finances:</h1>
         <FinancialRecordForm />
