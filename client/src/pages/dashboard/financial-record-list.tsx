@@ -124,6 +124,7 @@ export const FinancialRecordList = () => {
       cancelEditing();
     } catch (error) {
       // updateRecord already surfaces toast/error; we only reset saving state here.
+      console.error("Failed to save record:", error);
     } finally {
       setIsSaving(false);
     }
