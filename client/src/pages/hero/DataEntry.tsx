@@ -5,56 +5,68 @@ const DataEntry = () => {
     <section className="bg-white py-32">
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
-        <h2 className="font-serif text-5xl text-center text-gray-900 mb-24">
+        <h2 className="text-5xl font-black text-center text-gray-900 mb-24">
           Data entry. Easy as pie.
         </h2>
 
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
           {/* Bank connections */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-gray-900">
-              Bank connections
-            </h3>
-            <p className="text-sm text-gray-600">
-              14,545 bank & financial service connections worldwide
-            </p>
+          <div className="space-y-6 flex items-center flex-col justify-between">
+            <div className="space-y-4 mb-16">
+              <h3 className="text-3xl font-semibold text-gray-900">
+                Bank connections
+              </h3>
+              <p className="text-base">
+                14545 bank & financial service connections worldwide
+              </p>
+            </div>
             <img
               src="/dataentry/ipad-connections.png"
               alt="Bank connections"
               className="mx-auto max-w-xs drop-shadow-lg"
             />
-            <span className="text-[#b33556]">Learn more: Bank connections</span>
+            <span className="text-[#b33556] pt-16">
+              Learn more: Bank connections
+            </span>
           </div>
 
           {/* Add in the app */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-gray-900">Add in the app</h3>
-            <p className="text-sm text-gray-600">
-              4 quick taps to add an expense or income
-            </p>
+          <div className="space-y-6 flex items-center flex-col justify-between">
+            <div className="space-y-4 mb-16">
+              <h3 className="text-3xl font-semibold text-gray-900">
+                Add in the app
+              </h3>
+              <p className="text-base">
+                4 quick taps to add an expense or income
+              </p>
+            </div>
             <img
               src="/dataentry/add-expense.png"
               alt="Add expense"
               className="mx-auto max-w-[180px] drop-shadow-lg"
             />
-            <span className="text-[#b33556]">Learn more: Adding entries</span>
+            <span className="text-[#b33556] pt-16">
+              Learn more: Adding entries
+            </span>
           </div>
 
           {/* Import from file */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-gray-900">
-              Import from file
-            </h3>
-            <p className="text-sm text-gray-600">
-              8 file import formats supported in the web app
-            </p>
+          <div className="space-y-6 flex items-center flex-col justify-between">
+            <div className="space-y-4 mb-16">
+              <h3 className="text-3xl font-semibold text-gray-900">
+                Import from file
+              </h3>
+              <p className="text-base">
+                8 file import formats supported in the web app
+              </p>
+            </div>
             <img
               src="/dataentry/formats.png"
               alt="Import formats"
               className="mx-auto max-w-xs drop-shadow-lg"
             />
-            <span className="text-[#b33556]">Learn more: Importing</span>
+            <span className="text-[#b33556] pt-16">Learn more: Importing</span>
           </div>
         </div>
       </div>

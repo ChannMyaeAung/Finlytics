@@ -5,13 +5,14 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   type Cell,
+  type CellContext,
   type ColumnDef,
   useReactTable,
 } from "@tanstack/react-table";
-import { useFinancialRecords } from "@/context/financial-record-context";
+import { useFinancialRecords } from "@/context/financial-record-store";
 import { financialRecordColumns } from "./financial-record-columns";
 import { Button } from "@/components/ui/button";
-import type { FinancialRecord } from "@/context/financial-record-context";
+import type { FinancialRecord } from "@/context/financial-record-store";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Trash2 } from "lucide-react";
@@ -130,106 +131,114 @@ export const FinancialRecordList = () => {
     }
   }, [cancelEditing, draft, editingId, updateRecord]);
 
-  const beginDeleting = (record: FinancialRecord) => {
-    const recordId = getRecordId(record);
-    if (!recordId) {
-      return;
-    }
+  const beginDeleting = useCallback(
+    (record: FinancialRecord) => {
+      const recordId = getRecordId(record);
+      if (!recordId) {
+        return;
+      }
 
-    deleteRecord(recordId);
-  };
+      deleteRecord(recordId);
+    },
+    [deleteRecord]
+  );
 
   // Extend the base column definitions with an "Actions" column for edit controls.
-  const columns = useMemo<ColumnDef<FinancialRecord>[]>(
-    () => [
-      ...financialRecordColumns,
-      {
-        id: "actions",
-        header: "Actions",
-        cell: ({ row }) => {
-          const record = row.original;
-          const recordId = getRecordId(record);
-          const isRowEditing = editingId === recordId;
+  const columns = useMemo<ColumnDef<FinancialRecord>[]>(() => {
+    const actionColumn: ColumnDef<FinancialRecord> = {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }: CellContext<FinancialRecord, unknown>) => {
+        const record = row.original;
+        const recordId = getRecordId(record);
+        const isRowEditing = editingId === recordId;
 
-          if (!recordId) {
-            return null;
-          }
+        if (!recordId) {
+          return null;
+        }
 
-          if (isRowEditing) {
-            return (
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  variant="default"
-                  onClick={persistDraft}
-                  disabled={isSaving}
-                >
-                  Save
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={cancelEditing}
-                  disabled={isSaving}
-                >
-                  Cancel
-                </Button>
-              </div>
-            );
-          }
-
+        if (isRowEditing) {
           return (
             <div className="flex gap-2">
               <Button
                 size="sm"
-                variant="secondary"
-                onClick={() => beginEditing(record)}
-                className="cursor-pointer"
+                variant="default"
+                onClick={persistDraft}
+                disabled={isSaving}
               >
-                <span className="sr-only">Edit Records</span>
-                <Pen className="w-4 h-4 text-emerald-500 border-emerald-500" />
+                Save
               </Button>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button
-                    size={"sm"}
-                    variant="destructive"
-                    className="cursor-pointer"
-                  >
-                    <span className="sr-only">Delete Records</span>
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you sure you want to delete this record?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      the record from our servers.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel className="cursor-pointer">
-                      Cancel
-                    </AlertDialogCancel>
-                    <AlertDialogAction
-                      className="bg-destructive cursor-pointer hover:bg-destructive/90 transition-all"
-                      onClick={() => beginDeleting(record)}
-                    >
-                      Delete
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={cancelEditing}
+                disabled={isSaving}
+              >
+                Cancel
+              </Button>
             </div>
           );
-        },
+        }
+
+        return (
+          <div className="flex gap-2">
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => beginEditing(record)}
+              className="cursor-pointer"
+            >
+              <span className="sr-only">Edit Records</span>
+              <Pen className="w-4 h-4 text-emerald-500 border-emerald-500" />
+            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  className="cursor-pointer"
+                >
+                  <span className="sr-only">Delete Records</span>
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Are you sure you want to delete this record?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    the record from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="cursor-pointer">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    className="bg-destructive cursor-pointer hover:bg-destructive/90 transition-all"
+                    onClick={() => beginDeleting(record)}
+                  >
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        );
       },
-    ],
-    [beginEditing, cancelEditing, editingId, isSaving, persistDraft]
-  );
+    };
+
+    return [...financialRecordColumns, actionColumn];
+  }, [
+    beginEditing,
+    beginDeleting,
+    cancelEditing,
+    editingId,
+    isSaving,
+    persistDraft,
+  ]);
 
   // useReactTable wires rows, headers, and helpers together with the features we enable.
   const table = useReactTable({

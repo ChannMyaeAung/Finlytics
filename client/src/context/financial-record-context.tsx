@@ -1,32 +1,12 @@
 import { useUser } from "@clerk/clerk-react";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import toast from "react-hot-toast";
-
-export interface FinancialRecord {
-  id?: string; // legacy id clients might still send
-  _id?: string; // mongodb document id returned by the API
-  userId: string;
-  date: Date;
-  description: string;
-  amount: number;
-  category: string;
-  paymentMethod: string;
-}
-
-interface FinancialRecordContextType {
-  records: FinancialRecord[];
-  addRecord: (record: FinancialRecord) => void;
-  updateRecord: (
-    id: string,
-    updatedRecord: Partial<FinancialRecord>
-  ) => Promise<void>;
-  deleteRecord: (id: string) => void;
-}
-
-export const FinancialRecordContext = createContext<
-  FinancialRecordContextType | undefined
->(undefined);
+import { FinancialRecordContext } from "./financial-record-store";
+import type {
+  FinancialRecord,
+  FinancialRecordContextType,
+} from "./financial-record-store";
 
 export const FinancialRecordProvider = ({
   children,
@@ -56,8 +36,6 @@ export const FinancialRecordProvider = ({
   useEffect(() => {
     fetchRecords();
   }, [user?.id]);
-
-  console.log(records);
 
   // Function for adding a financial record
   const addRecord = async (record: FinancialRecord) => {
@@ -142,24 +120,16 @@ export const FinancialRecordProvider = ({
     }
   };
 
+  const contextValue: FinancialRecordContextType = {
+    records,
+    addRecord,
+    updateRecord,
+    deleteRecord,
+  };
+
   return (
-    <FinancialRecordContext.Provider
-      value={{ records, addRecord, updateRecord, deleteRecord }}
-    >
+    <FinancialRecordContext.Provider value={contextValue}>
       {children}
     </FinancialRecordContext.Provider>
   );
-};
-
-export const useFinancialRecords = () => {
-  const context = useContext<FinancialRecordContextType | undefined>(
-    FinancialRecordContext
-  );
-
-  if (!context) {
-    throw new Error(
-      "useFinancialRecords must be used within a FinancialRecordProvider"
-    );
-  }
-  return context;
 };

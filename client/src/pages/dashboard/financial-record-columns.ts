@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { FinancialRecord } from "@/context/financial-record-context";
+import type { FinancialRecord } from "@/context/financial-record-store";
 
 // Helper so we do not repeat currency formatting inside each cell renderer.
 const currency = (value: number) =>

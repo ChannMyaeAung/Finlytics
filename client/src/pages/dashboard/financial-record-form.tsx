@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useUser } from "@clerk/clerk-react";
-import { useFinancialRecords } from "@/context/financial-record-context";
+import { useFinancialRecords } from "@/context/financial-record-store";
 
 export const FinancialRecordForm = () => {
   const [description, setDescription] = useState<string>("");

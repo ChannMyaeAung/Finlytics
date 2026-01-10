@@ -8,6 +8,7 @@ import { FinancialRecordProvider } from "./context/financial-record-context";
 import Hero from "./pages/hero";
 import Navbar from "./components/navbar";
 import BankConnections from "./pages/bank-connections";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               element={
                 <>
                   <Hero />
+                  <Footer />
                 </>
               }
             />
