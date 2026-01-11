@@ -14,24 +14,25 @@ const TestimonialSection = () => {
         alt="world background image"
         className="h-[90%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       />
-      <h1>
+      <h1 className="ml-20 z-50 absolute top-10">
         <em className="leading-[1em] text-6xl font-black text-center not-italic">
           Trusted by <br />
           millions.
         </em>
       </h1>
 
-      <div className="relative flex w-full flex-col items-center  justify-center overflow-hidden py-8">
+      <div className="relative flex w-full flex-col items-center  justify-center overflow-hidden py-8 my-40">
         <ScrollVelocityContainer className="w-full">
+          {/* 1st Testimonials Row */}
           <ScrollVelocityRow baseVelocity={1} direction={1} className="py-4">
             {testimonials.map((t, index) => (
               <div
-                className="flex flex-col bg-white border border-lg items-center mx-4 h-100 w-120 rounded-lg shadow-md overflow-hidden py-6 px-8 space-y-6"
+                className="flex flex-col bg-white border border-lg mx-4 min-h-80 h-80 space-y-6 w-120 rounded-lg shadow-md overflow-hidden py-6 px-8 relative"
                 key={index}
               >
                 {/* Avatar, Name, Date, and Source */}
                 <div className="flex items-center gap-3 justify-start self-start">
-                  <Avatar>
+                  <Avatar className="size-15">
                     <AvatarImage
                       src={t.avatar}
                       alt={t.name}
@@ -44,9 +45,11 @@ const TestimonialSection = () => {
                     <h2 className="scroll-m-20 text-lg font-semibold tracking-tight">
                       {t.name}
                     </h2>
-                    <div className="flex gap-2 items-center">
-                      <span className="text-gray-500 text-xs">{t.date}</span>
-                      <span className="text-[#f73a7e] text-base">
+                    <div className="flex gap-1 items-center">
+                      <span className="text-gray-500 text-[15px]">
+                        {t.date}
+                      </span>
+                      <span className="text-[#f73a7e] text-[15px]">
                         {t.source}
                       </span>
                     </div>
@@ -54,24 +57,34 @@ const TestimonialSection = () => {
                 </div>
 
                 {/* Testimonial Text and Rating stars */}
-                <div className="text-wrap">
-                  <p className="leading-7 [&:not(:first-child)]:mt-6 line-clamp-10 text-gray-500">
+                <div className="text-wrap flex-1 h-full">
+                  <p className="leading-5 text-sm [&:not(:first-child)]:mt-6 line-clamp-10 text-gray-500">
                     {t.text}
                   </p>
+                </div>
+
+                {/* Rating Stars */}
+                <div className="flex self-center items-center justify-center w-full absolute right-0 bottom-3">
+                  {testimonials.map((t, idx) => (
+                    <div key={idx}>
+                      <StarIcon />
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </ScrollVelocityRow>
 
+          {/* 2nd Testimonials Row */}
           <ScrollVelocityRow baseVelocity={1} direction={-1} className="py-4">
             {testimonialsTwo.map((t, idx) => (
               <div
-                className="flex flex-col bg-white border border-lg mx-4 h-100 space-y-6 w-120 rounded-lg shadow-md overflow-hidden py-6 px-8"
+                className="flex flex-col bg-white border border-lg mx-4 min-h-80 h-80 space-y-6 w-120 rounded-lg shadow-md overflow-hidden py-6 px-8 relative"
                 key={idx}
               >
                 {/* Avatar, Name, Date, and Source */}
                 <div className="flex items-center gap-3 justify-start self-start">
-                  <Avatar>
+                  <Avatar className="size-15">
                     <AvatarImage src={t.avatar} alt={t.name} />
                     <AvatarFallback>{t.name}</AvatarFallback>
                   </Avatar>
@@ -79,27 +92,36 @@ const TestimonialSection = () => {
                     <h2 className="scroll-m-20 text-lg font-semibold tracking-tight">
                       {t.name}
                     </h2>
-                    <div className="flex gap-2 items-center">
-                      <span className="text-gray-500 text-xs">{t.date}</span>
-                      <span className="text-[#f73a7e] text-base">
+                    <div className="flex gap-1 items-center">
+                      <span className="text-gray-500 text-[15px]">
+                        {t.date}
+                      </span>
+                      <span className="text-[#f73a7e] text-[15px]">
                         {t.source}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Testimonial Text and Rating stars */}
-                <div className="text-wrap">
-                  <p className="leading-7 text-base [&:not(:first-child)]:mt-6 line-clamp-10 text-gray-500">
+                {/* Testimonial Text */}
+                <div className="text-wrap flex-1 h-full">
+                  <p className="leading-5 text-sm [&:not(:first-child)]:mt-6 line-clamp-10 text-gray-500">
                     {t.text}
                   </p>
+                </div>
+
+                {/* Rating Stars */}
+                <div className="flex self-center items-center justify-center w-full absolute right-0 bottom-3">
+                  {testimonialsTwo.map((t, idx) => (
+                    <div key={idx}>
+                      <StarIcon />
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </ScrollVelocityRow>
         </ScrollVelocityContainer>
-        <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
-        <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div>
       </div>
     </section>
   );
