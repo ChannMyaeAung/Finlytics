@@ -53,6 +53,7 @@ type DraftRecord = {
   amount: string;
   category: string;
   paymentMethod: string;
+  transactionType: "income" | "expense";
 };
 
 export const FinancialRecordList = () => {
@@ -85,13 +86,17 @@ export const FinancialRecordList = () => {
   const beginEditing = useCallback((record: FinancialRecord) => {
     const recordId = record._id ?? record.id;
     if (!recordId) return;
-    setEditingId(recordId);
+
+    const currentType =
+      record.transactionType ?? (record.amount >= 0 ? "income" : "expense");
+
     setDraft({
       date: toInputDate(record.date),
       description: record.description,
-      amount: record.amount?.toString() ?? "0",
+      amount: Math.abs(record.amount).toString(),
       category: record.category,
       paymentMethod: record.paymentMethod,
+      transactionType: currentType,
     });
   }, []);
 
@@ -115,12 +120,19 @@ export const FinancialRecordList = () => {
     if (!editingId || !draft) return;
     setIsSaving(true);
     try {
+      const numericAmount = parseFloat(draft.amount);
+      const signedAmount =
+        draft.transactionType === "expense"
+          ? -Math.abs(numericAmount)
+          : Math.abs(numericAmount);
+
       await updateRecord(editingId, {
         date: new Date(draft.date),
         description: draft.description,
-        amount: Number(draft.amount),
+        amount: signedAmount,
         category: draft.category,
         paymentMethod: draft.paymentMethod,
+        transactionType: draft.transactionType,
       });
       cancelEditing();
     } catch (error) {
@@ -285,13 +297,30 @@ export const FinancialRecordList = () => {
         );
       case "amount":
         return (
-          <Input
-            type="number"
-            value={draft.amount}
-            onChange={(event) =>
-              handleDraftChange("amount", event.target.value)
-            }
-          />
+          <div className="flex items-center gap-2">
+            <select
+              className="rounded-md border border-input bg-background px-2 py-1 text-sm"
+              value={draft.transactionType}
+              onChange={(e) =>
+                handleDraftChange(
+                  "transactionType",
+                  e.target.value as "income" | "expense"
+                )
+              }
+            >
+              <option value="income">+</option>
+              <option value="expense">-</option>
+            </select>
+            <Input
+              type="number"
+              min="0"
+              step="0.01"
+              value={draft.amount}
+              onChange={(event) =>
+                handleDraftChange("amount", event.target.value)
+              }
+            />
+          </div>
         );
       case "category":
         return (

@@ -17,6 +17,16 @@ export const financialRecordColumns: ColumnDef<FinancialRecord>[] = [
     },
   },
   {
+    header: "Type",
+    accessorKey: "transactionType",
+    cell: ({ getValue, row }) => {
+      // Use the explicit type if available; otherwise infer from sign
+      const type =
+        getValue<string>() ?? (row.original.amount >= 0 ? "income" : "expense");
+      return type.charAt(0).toUpperCase() + type.slice(1);
+    },
+  },
+  {
     // Plain accessors can rely on the default cell renderer.
     header: "Description",
     accessorKey: "description",

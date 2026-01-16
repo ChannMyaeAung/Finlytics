@@ -97,7 +97,8 @@ export const Dashboard = () => {
               </span>
             </div>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-300">
-              Sort, edit, and delete entries directly in the table below.
+              Sort, edit, and delete entries directly in the table below. Click
+              on any table title to start sorting.
             </p>
             <div className="mt-6">
               <FinancialRecordList />

@@ -16,6 +16,14 @@ export const FinancialRecordProvider = ({
   const [records, setRecords] = useState<FinancialRecord[]>([]);
   const { user } = useUser();
 
+  // Helper to normalize record structure (infer type from sign if missing)
+  const normalizeRecord = (record: FinancialRecord): FinancialRecord => {
+    if (!record.transactionType) {
+      record.transactionType = record.amount >= 0 ? "income" : "expense";
+    }
+    return record;
+  };
+
   // function for fetching financial records by userId
   const fetchRecords = async () => {
     try {
@@ -25,7 +33,7 @@ export const FinancialRecordProvider = ({
       );
       if (response.ok) {
         const records = await response.json();
-        setRecords(records);
+        setRecords(records.map(normalizeRecord));
       }
     } catch (error) {
       console.error("Failed to fetch records:", error);
@@ -33,6 +41,7 @@ export const FinancialRecordProvider = ({
     }
   };
 
+  // If the user is logged in, fetch their financial records
   useEffect(() => {
     fetchRecords();
   }, [user?.id]);
@@ -50,7 +59,10 @@ export const FinancialRecordProvider = ({
 
       if (response.ok) {
         const savedRecord = await response.json();
-        setRecords((prevRecords) => [...prevRecords, savedRecord]);
+        setRecords((prevRecords) => [
+          ...prevRecords,
+          normalizeRecord(savedRecord),
+        ]);
       }
     } catch (error) {
       console.error("Failed to add record:", error);
@@ -79,6 +91,7 @@ export const FinancialRecordProvider = ({
       }
 
       const savedRecord = await response.json();
+
       setRecords((prevRecords) =>
         prevRecords.map((record) =>
           (record._id ?? record.id) === savedRecord._id ? savedRecord : record

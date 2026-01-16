@@ -18,12 +18,17 @@ import {
 } from "@/components/ui/select";
 import { useUser } from "@clerk/clerk-react";
 import { useFinancialRecords } from "@/context/financial-record-store";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 export const FinancialRecordForm = () => {
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [transactionType, setTransactionType] = useState<"income" | "expense">(
+    "expense"
+  );
   const { records, addRecord } = useFinancialRecords();
 
   const { user } = useUser();
@@ -31,11 +36,19 @@ export const FinancialRecordForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const numericAmount = parseFloat(amount);
+    // If expense, ensure amount is stored as negative. If income, as positive.
+    const signedAmount =
+      transactionType === "expense"
+        ? -Math.abs(numericAmount)
+        : Math.abs(numericAmount);
+
     const newRecord = {
       userId: user?.id ?? "",
       date: new Date(),
       description: description,
-      amount: parseFloat(amount),
+      amount: signedAmount,
+      transactionType: transactionType,
       category: category,
       paymentMethod: paymentMethod,
     };
@@ -47,17 +60,35 @@ export const FinancialRecordForm = () => {
     setAmount("");
     setCategory("");
     setPaymentMethod("");
+    setTransactionType("expense");
   };
 
   return (
     <div className="w-full max-w-md mx-auto border p-6 rounded-lg shadow-md">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="">
         <FieldGroup>
           <FieldSet>
             <FieldLegend>Financial Record Form</FieldLegend>
-            <FieldDescription>
-              This is a placeholder for the financial record form.
-            </FieldDescription>
+            <FieldDescription>Add a new transaction.</FieldDescription>
+
+            {/* Transaction Type Toggle */}
+            <RadioGroup
+              value={transactionType}
+              onValueChange={(value) =>
+                setTransactionType(value as "income" | "expense")
+              }
+              className="flex items-center gap-3"
+            >
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="expense" id="expense" />
+                <Label htmlFor="expense">Expense</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="income" id="income" />
+                <Label htmlFor="income">Income</Label>
+              </div>
+            </RadioGroup>
+
             <FieldGroup>
               {/* Description */}
               <Field>

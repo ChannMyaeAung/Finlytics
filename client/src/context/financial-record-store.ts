@@ -6,6 +6,7 @@ export interface FinancialRecord {
   userId: string;
   date: Date;
   description: string;
+  transactionType: "income" | "expense";
   amount: number;
   category: string;
   paymentMethod: string;

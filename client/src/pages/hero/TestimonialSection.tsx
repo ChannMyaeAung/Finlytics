@@ -86,7 +86,7 @@ const TestimonialSection = () => {
                 <div className="flex items-center gap-3 justify-start self-start">
                   <Avatar className="size-15">
                     <AvatarImage src={t.avatar} alt={t.name} />
-                    <AvatarFallback>{t.name}</AvatarFallback>
+                    <AvatarFallback className="bg-blue-500"></AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col">
                     <h2 className="scroll-m-20 text-lg font-semibold tracking-tight">
@@ -111,13 +111,7 @@ const TestimonialSection = () => {
                 </div>
 
                 {/* Rating Stars */}
-                <div className="flex self-center items-center justify-center w-full absolute right-0 bottom-3">
-                  {testimonialsTwo.map((t, idx) => (
-                    <div key={idx}>
-                      <StarIcon />
-                    </div>
-                  ))}
-                </div>
+                <div className="flex self-center items-center justify-center w-full absolute right-0 bottom-3"></div>
               </div>
             ))}
           </ScrollVelocityRow>
