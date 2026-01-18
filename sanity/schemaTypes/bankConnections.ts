@@ -1,50 +1,46 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'bankConnections',
-  title: 'bankConnections',
+  name: 'bankConnection',
+  title: 'Bank Connection',
   type: 'document',
   fields: [
     defineField({
       name: 'name',
-      title: 'Name',
+      title: 'Bank name',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
+      name: 'country',
+      title: 'Country',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'logo',
+      title: 'Logo',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: {hotspot: true},
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'bio',
-      title: 'Bio',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
-          lists: [],
-        },
-      ],
+      name: 'popularOrder',
+      title: 'Popular Order',
+      type: 'number',
+      description: 'Order for displaying popular banks (lower numbers appear first)',
+    }),
+    defineField({
+      name: 'listOrder',
+      title: 'List Order',
+      type: 'number',
+      description: 'Order for displaying all banks (lower numbers appear first)',
+    }),
+    defineField({
+      name: 'isPopular',
+      title: 'Popular bank',
+      type: 'boolean',
+      initialValue: false,
     }),
   ],
-  preview: {
-    select: {
-      title: 'name',
-      media: 'image',
-    },
-  },
 })
