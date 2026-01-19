@@ -1,3 +1,6 @@
+// Queries related to bank connections
+
+// Query to fetch popular bank connections for a given country
 export const POPULAR_BANK_CONNECTIONS_QUERY = `
 *[
   _type == "bankConnection" &&
@@ -26,3 +29,21 @@ export const ALL_BANK_CONNECTIONS_QUERY = `
 }
 `;
 export const BANK_COUNT_QUERY = `count(*[_type == "bankConnection"])`;
+
+// Query to fetch bank connection page contents
+export const BANK_CONNECTION_CONTENTS_QUERY = `
+*[
+  _type == "bankConnectionContents"
+] {
+  title,
+  Image,
+  sections[] {
+    heading,
+    content,
+    links[] {
+      label,
+      url
+    }
+  }
+}
+`;

@@ -1,14 +1,20 @@
-import {defineType, defineArrayMember, defineField} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'bankConnectionContents',
-  title: 'Bank Connection Contents',
+  title: 'Bank Connection Page Contents',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Page Title',
+      title: 'Page Title', // e.g. "Main Bank Options"
       type: 'string',
+    }),
+    defineField({
+      name: 'Image',
+      title: 'Header Image',
+      type: 'image',
+      options: {hotspot: true},
     }),
     defineField({
       name: 'sections',
@@ -60,29 +66,26 @@ export default defineType({
                 }),
               ],
             }),
-          ],
-        }),
-        defineField({
-          name: 'links',
-          title: 'Action Links',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'label',
-                  title: 'Label',
-                  type: 'string',
-                }),
-                defineField({
-                  name: 'url',
-                  title: 'URL',
-                  type: 'string',
+            defineField({
+              name: 'links',
+              title: 'Action Links',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({name: 'label', title: 'Label', type: 'string'}),
+                    defineField({name: 'url', title: 'URL', type: 'string'}),
+                  ],
                 }),
               ],
             }),
           ],
+          preview: {
+            select: {
+              title: 'heading',
+            },
+          },
         }),
       ],
     }),
