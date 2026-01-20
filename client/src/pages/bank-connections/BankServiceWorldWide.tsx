@@ -125,17 +125,17 @@ const BankServiceWorldWide = () => {
         {/* Header */}
         <div className="mb-16 w-full">
           <div>
-            <h1 className="flex items-center justify-between gap-10 text-6xl font-black text-gray-900">
-              <span className="text-8xl">14538</span>
-              <span className="font-bold">
+            <h1 className="flex flex-col lg:flex-row items-center justify-between gap-10 text-6xl font-black text-gray-900">
+              <span className="lg:text-8xl">14538</span>
+              <span className="font-bold text-4xl">
                 bank & financial service connections worldwide
               </span>
             </h1>
           </div>
 
           {/* Controls */}
-          <div className="flex flex-col sm:flex-row gap-6 mt-12 items-center justify-between">
-            <div className="relative w-150   bg-white">
+          <div className="flex flex-col lg:flex-row gap-6 mt-12 items-center justify-between">
+            <div className="relative lg:w-150 w-full bg-white">
               <Input
                 type="text"
                 placeholder="Find the financial institution that you want to add"
@@ -148,14 +148,14 @@ const BankServiceWorldWide = () => {
               </span>
             </div>
 
-            <div className="relative inline-flex items-center ">
-              <span className="mr-[10%] w-40 font-semibold whitespace-nowrap">
+            <div className="relative inline-flex items-center justify-between w-full">
+              <span className="lg:mr-[10%] mr-[5%] lg:w-40 text-sm lg:text-base font-semibold whitespace-nowrap">
                 Popular Banks in
               </span>
               <select
                 value={country}
                 onChange={handleSetCountry}
-                className="rounded-md appearance-none border border-gray-300 px-4 pr-10 py-3 bg-white w-60 text-sm shadow-sm"
+                className="rounded-md appearance-none border border-gray-300 px-4 pr-10 py-3 bg-white w-full lg:w-60 text-sm shadow-sm"
               >
                 {countries.map((country) => (
                   <option key={country} value={country}>
@@ -173,7 +173,7 @@ const BankServiceWorldWide = () => {
         </div>
 
         {/* Banks grid */}
-        <div className="bg-white rounded-xl shadow-xl min-h-100 relative">
+        <div className="bg-white rounded-xl shadow-xl min-h-100 relative px-4 lg:px-0">
           {isLoading ? (
             <div className="flex absolute inset-0 items-center justify-center bg-white/50 z-10 rounded-xl">
               <Loader2 className="animate-spin w-10 h-10 text-gray-500" />
@@ -183,18 +183,18 @@ const BankServiceWorldWide = () => {
               Failed to load banks. Please try again.
             </div>
           ) : (
-            <div className="flex flex-wrap gap-8 p-8 items-center justify-around ">
+            <div className="lg:flex lg:flex-wrap lg:gap-8 lg:p-8 grid grid-cols-3 lg:items-center justify-around">
               {filteredBanks.map((bank: BankType) => (
                 <div
                   key={bank._id}
-                  className="group flex flex-col min-w-50 items-center gap-4 transition-all hover:bg-gray-400/20 cursor-pointer px-4 py-4 rounded-md pb-12  hover:text-[#b33556]"
+                  className="group flex flex-col lg:min-w-50 items-center gap-4 transition-all hover:bg-gray-400/20 cursor-pointer px-4 py-4 rounded-md lg:pb-12  hover:text-[#b33556]"
                 >
                   <img
-                    src={urlFor(bank.logo).width(96).height(96).url()}
+                    src={urlFor(bank.logo).url()}
                     alt={bank.name}
-                    className="h-20 w-20 object-contain"
+                    className="lg:h-20 lg:w-20 w-10 h-10 object-contain"
                   />
-                  <p className="text-sm font-medium text-gray-800 transition-all group-hover:text-[#b33556]">
+                  <p className="text-sm font-medium text-gray-800 transition-all group-hover:text-[#b33556] text-center">
                     {bank.name}
                   </p>
                 </div>
@@ -232,7 +232,7 @@ const BankServiceWorldWide = () => {
                     Failed to load banks. Please try again.
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-10 px-8 pb-8 pt-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-10 px-8 pb-8 pt-4">
                     {allBanks.map((bank: BankType) => (
                       <div
                         key={bank._id}

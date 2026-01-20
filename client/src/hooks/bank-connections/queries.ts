@@ -34,9 +34,10 @@ export const BANK_COUNT_QUERY = `count(*[_type == "bankConnection"])`;
 export const BANK_CONNECTION_CONTENTS_QUERY = `
 *[
   _type == "bankConnectionContents"
-] {
+] | order(ContentOrder asc) {
   title,
   Image,
+    SecondaryImage,
   sections[] {
     heading,
     content,

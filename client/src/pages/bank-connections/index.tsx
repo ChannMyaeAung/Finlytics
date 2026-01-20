@@ -1,20 +1,13 @@
-import React from "react";
+import Footer from "@/components/footer";
 import BankServiceWorldWide from "./BankServiceWorldWide";
-import SetUpFinance from "./SetUpFinance";
-import AutoCategorization from "./AutoCategorization";
-import Splitting from "./Splitting";
-import Security from "./Security";
-import HowBankConnectionsWork from "./HowBankConnectionsWork";
+import Content from "./Content";
 
 const BankConnections = () => {
   return (
     <section id="Bank-Connections">
       <BankServiceWorldWide />
-      <SetUpFinance />
-      <AutoCategorization />
-      <Splitting />
-      <Security />
-      <HowBankConnectionsWork />
+      <Content />
+      <Footer />
     </section>
   );
 };

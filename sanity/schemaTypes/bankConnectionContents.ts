@@ -11,8 +11,21 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'ContentOrder',
+      title: 'Content Order',
+      type: 'number',
+      description: 'Order of the content on the bank connection page (lower numbers appear first)',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'Image',
       title: 'Header Image',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+    defineField({
+      name: 'SecondaryImage',
+      title: 'Secondary Image',
       type: 'image',
       options: {hotspot: true},
     }),
