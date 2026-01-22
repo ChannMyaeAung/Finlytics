@@ -8,7 +8,7 @@ const HeroIntro = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
           {/* LEFT CONTENT */}
           <div className="items-center flex flex-col text-center">
-            <h1 className="text-[5rem] font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
+            <h1 className="md:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
               Track all
               <br />
               your cards
@@ -18,7 +18,7 @@ const HeroIntro = () => {
               <i>in one place.</i>
             </h1>
 
-            <p className="mt-6 max-w-md text-gray-600 dark:text-white/80">
+            <p className="mt-6 max-w-md text-sm md:text-base text-gray-600 dark:text-white/80">
               Connect your financial accounts, or enter expenses using our quick
               and slick <strong>Finlytics apps</strong>. Toshl helps you with
               the financial means. So you can{" "}
@@ -35,25 +35,29 @@ const HeroIntro = () => {
           </div>
 
           {/* RIGHT DEVICES */}
-          <div className="relative h-[520px] hidden lg:block">
+          <div className="relative md:h-130">
             {/* iPad */}
             <img
               src="ipad.png"
               alt="iPad dashboard"
               className="
                 absolute
-                top-20
+                -top-40
+                md:top-20
                 w-[80vw]
-                max-w-224.75
+                md:max-w-224.75
                 min-w-[449.5px]
-                rotate-x-0
-                rotate-y-0
-                rotate-z-0
-                scale-3d
-                -mt-24
-                left-[4vw]
-                z-10
-                drop-shadow-2xl
+                md:rotate-x-0
+                md:rotate-y-0
+                md:rotate-z-0
+                md:scale-3d
+                scale-100
+                mt-25
+                md:-mt-24
+                -left-38
+                md:left-[4vw]
+                md:z-10
+                md:drop-shadow-2xl
               "
             />
 
@@ -63,13 +67,17 @@ const HeroIntro = () => {
               alt="iPhone app"
               className="
                 absolute
-                top-[-11%]
-                left-68
-                w-[50vw]
+                top-30
+                md:top-[-11%]
+                -left-8
+                md:left-1/2
+                md:w-[50vw]
                 rotate-x-0
                 rotate-y-0
                 rotate-z-0
-                scale-3d
+                w-[90vw]
+                scale-140
+                md:scale-3d
                 z-20
                 drop-shadow-2xl
               "
