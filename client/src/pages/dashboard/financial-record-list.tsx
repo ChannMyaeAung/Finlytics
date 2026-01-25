@@ -9,10 +9,10 @@ import {
   type ColumnDef,
   useReactTable,
 } from "@tanstack/react-table";
-import { useFinancialRecords } from "@/context/financial-record-store";
+import { useFinancialRecords } from "@/hooks/dashboard/financial-record-store";
 import { financialRecordColumns } from "./financial-record-columns";
 import { Button } from "@/components/ui/button";
-import type { FinancialRecord } from "@/context/financial-record-store";
+import type { FinancialRecord } from "@/hooks/dashboard/financial-record-store";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Trash2 } from "lucide-react";
@@ -112,7 +112,7 @@ export const FinancialRecordList = () => {
     (field: keyof DraftRecord, value: string) => {
       setDraft((prev) => (prev ? { ...prev, [field]: value } : prev));
     },
-    []
+    [],
   );
 
   // Push edits to the API, then collapse the row back into read-only mode.
@@ -152,7 +152,7 @@ export const FinancialRecordList = () => {
 
       deleteRecord(recordId);
     },
-    [deleteRecord]
+    [deleteRecord],
   );
 
   // Extend the base column definitions with an "Actions" column for edit controls.
@@ -304,7 +304,7 @@ export const FinancialRecordList = () => {
               onChange={(e) =>
                 handleDraftChange(
                   "transactionType",
-                  e.target.value as "income" | "expense"
+                  e.target.value as "income" | "expense",
                 )
               }
             >
@@ -381,7 +381,7 @@ export const FinancialRecordList = () => {
                     {/* flexRender lets TanStack render strings, JSX, or functions the same way */}
                     {flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
                     {{
                       asc: "▲",

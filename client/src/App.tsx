@@ -1,14 +1,27 @@
-import { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
 import { ThemeProvider } from "./components/theme-provider";
-import { FinancialRecordProvider } from "./context/financial-record-context";
+import { FinancialRecordProvider } from "./hooks/dashboard/financial-record-context";
 import Hero from "./pages/hero";
 import Navbar from "./components/navbar";
 import BankConnections from "./pages/bank-connections";
 import Footer from "./components/footer";
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import CurrenciesPage from "./pages/currencies";
+
+// Protected routes
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <SignedIn>{children}</SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  );
+};
 
 function App() {
   return (
@@ -29,12 +42,15 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                <FinancialRecordProvider>
-                  <Dashboard />
-                </FinancialRecordProvider>
+                <ProtectedRoute>
+                  <FinancialRecordProvider>
+                    <Dashboard />
+                  </FinancialRecordProvider>
+                </ProtectedRoute>
               }
             />
             <Route path="/bank-connections" element={<BankConnections />} />
+            <Route path="/currencies" element={<CurrenciesPage />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </div>

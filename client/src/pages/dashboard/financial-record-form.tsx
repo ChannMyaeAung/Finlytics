@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useUser } from "@clerk/clerk-react";
-import { useFinancialRecords } from "@/context/financial-record-store";
+import { useFinancialRecords } from "@/hooks/dashboard/financial-record-store";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
@@ -27,7 +27,7 @@ export const FinancialRecordForm = () => {
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [transactionType, setTransactionType] = useState<"income" | "expense">(
-    "expense"
+    "expense",
   );
   const { records, addRecord } = useFinancialRecords();
 

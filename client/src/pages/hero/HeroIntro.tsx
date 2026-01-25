@@ -3,12 +3,12 @@ import React from "react";
 
 const HeroIntro = () => {
   return (
-    <section className="bg-[#f9f9f3] dark:bg-black overflow-hidden h-[70vh]">
+    <section className="bg-[#f9f9f3] dark:bg-black overflow-hidden h-[70vh] md:h-full ">
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
           {/* LEFT CONTENT */}
           <div className="items-center flex flex-col text-center">
-            <h1 className="md:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
+            <h1 className="lg:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
               Track all
               <br />
               your cards
@@ -43,21 +43,21 @@ const HeroIntro = () => {
               className="
                 absolute
                 -top-40
-                md:top-20
+                sm:top-20
                 w-[80vw]
-                md:max-w-224.75
+                sm:max-w-224.75
                 min-w-[449.5px]
-                md:rotate-x-0
-                md:rotate-y-0
-                md:rotate-z-0
-                md:scale-3d
+                sm:rotate-x-0
+                sm:rotate-y-0
+                sm:rotate-z-0
+                sm:scale-3d
                 scale-100
                 mt-25
-                md:-mt-24
+                sm:-mt-24
                 -left-38
-                md:left-[4vw]
-                md:z-10
-                md:drop-shadow-2xl
+                sm:left-[4vw]
+                sm:z-10
+                sm:drop-shadow-2xl
               "
             />
 
@@ -68,16 +68,16 @@ const HeroIntro = () => {
               className="
                 absolute
                 top-30
-                md:top-[-11%]
+                sm:top-[-11%]
                 -left-8
-                md:left-1/2
-                md:w-[50vw]
+                sm:left-1/2
+                sm:w-[50vw]
                 rotate-x-0
                 rotate-y-0
                 rotate-z-0
                 w-[90vw]
                 scale-140
-                md:scale-3d
+                sm:scale-3d
                 z-20
                 drop-shadow-2xl
               "

@@ -2,7 +2,6 @@ import {
   ScrollVelocityContainer,
   ScrollVelocityRow,
 } from "@/components/ui/scroll-based-velocity";
-import React from "react";
 import { testimonials, testimonialsTwo } from "./data/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -14,8 +13,8 @@ const TestimonialSection = () => {
         alt="world background image"
         className="h-[90%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       />
-      <h1 className="ml-20 z-50 absolute top-10">
-        <em className="leading-[1em] text-6xl font-black text-center not-italic">
+      <h1 className="ml-20 z-10 absolute -left-10 md:left-0 top-10">
+        <em className="leading-[1em] text-4xl text-start md:text-6xl font-black md:text-center not-italic">
           Trusted by <br />
           millions.
         </em>

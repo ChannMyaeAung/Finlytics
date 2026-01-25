@@ -7,9 +7,9 @@ export default function AppsAccessSection() {
           <h3 className="text-lg font-medium tracking-wider text-gray-800 pb-12">
             Mobile apps
           </h3>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <div className="bg-black px-3 py-1.5 rounded-sm">
-              <a href="#" className="flex items-center">
+          <div className="flex items-center flex-col justify-center gap-4 flex-wrap">
+            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%]">
+              <a href="#" className="flex items-center justify-center w-full">
                 <img
                   src="/badges/apple.png"
                   alt="Download on the App Store"
@@ -29,8 +29,8 @@ export default function AppsAccessSection() {
               </a>
             </div>
 
-            <div className="bg-black px-3 py-1.5 rounded-sm">
-              <a href="#" className="flex items-center">
+            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%]">
+              <a href="#" className="flex items-center justify-center w-full">
                 <img
                   src="/badges/playstore.png"
                   alt="Download on the App Store"
@@ -55,7 +55,7 @@ export default function AppsAccessSection() {
             or{" "}
             <a
               href="#"
-              className="text-[#b33556] text-lg font-normal hover:underline"
+              className="text-[#b33556] text-sm md:text-lg font-normal hover:underline"
             >
               download the Android app directly
             </a>
@@ -64,22 +64,22 @@ export default function AppsAccessSection() {
 
         {/* Web App */}
         <div className="space-y-6">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-gray-800">
+          <h3 className="text-sm font-bold tracking-wider text-gray-800">
             Web app
           </h3>
 
           <div className="flex justify-center gap-4 flex-wrap">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold shadow-2xl">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold shadow-2xl w-full justify-center">
               <img src="/badges/apple.png" alt="apple logo" className="h-4" />
               Log in with Apple
             </button>
 
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-gray-300 text-sm font-semibold shadow-lg">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-gray-300 text-sm font-semibold shadow-lg w-full justify-center">
               <img src="/badges/google.png" alt="google logo" className="h-4" />
               Log in with Google
             </button>
 
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#007aff] text-white text-sm font-semibold shadow-lg">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#007aff] text-white text-sm font-semibold shadow-lg w-full justify-center">
               <img
                 src="/badges/facebook.png"
                 alt="facebook logo"
@@ -91,7 +91,10 @@ export default function AppsAccessSection() {
 
           <p className="text-lg text-gray-600">
             or{" "}
-            <a href="#" className="text-[#b33556] font-normal hover:underline">
+            <a
+              href="#"
+              className="text-[#b33556] text-sm font-normal hover:underline"
+            >
               Sign up with email
             </a>
           </p>

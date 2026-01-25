@@ -3,6 +3,7 @@ import express from "express";
 import type { Express } from "express";
 import mongoose from "mongoose";
 import financialRecordRouter from "./routes/financial-record.ts";
+import currencyRouter from "./routes/currency.ts";
 import cors from "cors";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
@@ -34,6 +35,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/financial-records", financialRecordRouter);
+app.use("/api/currency", currencyRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

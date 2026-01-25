@@ -46,10 +46,10 @@ const Content = () => {
       )}
 
       {fetchedContents.map((contentDoc, idx) => (
-        <div>
+        <div key={`content-${idx}`}>
           {contentDoc.sections?.map((section, sectionIdx) => (
             <SectionComponent
-              key={sectionIdx}
+              key={`${idx}-${sectionIdx}`}
               section={section}
               image={contentDoc.Image}
               secondaryImage={contentDoc.SecondaryImage}

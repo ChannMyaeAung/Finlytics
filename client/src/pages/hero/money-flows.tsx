@@ -78,7 +78,7 @@ const MoneyFlowsPage = () => {
             before:pointer-events-none
             "
         >
-          <div className="flex w-full justify-center flex-wrap md:gap-6">
+          <div className="flex w-full flex-wrap gap-6 px-4 md:px-0 justify-around">
             {TABS.map((tab) => {
               const isActive = tab.id === activeTab;
               return (
@@ -86,11 +86,13 @@ const MoneyFlowsPage = () => {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={[
-                    "relative py-4 border-0 font-normal uppercase tracking-normal transition-colors cursor-pointer w-full max-w-20 md:max-w-40",
+                    "relative py-4 border-0 font-normal uppercase tracking-normal transition-colors cursor-pointer text-xs w-full max-w-fit md:max-w-40",
                     isActive && "text-gray-900",
                   ].join(" ")}
                 >
-                  <span className="text-xs">{tab.label}</span>
+                  <span className="text-xs! whitespace-nowrap">
+                    {tab.label}
+                  </span>
 
                   {/* Underline */}
                   {isActive && (
@@ -128,7 +130,7 @@ const MoneyFlowsPage = () => {
                   />
                 </div>
                 <div className="w-full max-w-3xl text-center">
-                  <p className="mt-6 text-sm md:text-lg font-medium leading-relaxed text-gray-600">
+                  <p className="mt-6 text-sm md:text-lg font-medium leading-relaxed text-gray-600 px-2">
                     {tab.description}
                   </p>
                   <button className="mt-8 text-lg cursor-pointer font-bold text-[#b33556] hover:underline">
