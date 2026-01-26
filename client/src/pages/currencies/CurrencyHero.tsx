@@ -1,4 +1,4 @@
-import React from "react";
+import { motion } from "motion/react";
 import CurrencyConverter from "./CurrencyConverter";
 
 const CurrencyHero = () => {
@@ -6,18 +6,24 @@ const CurrencyHero = () => {
     <div className="bg-[#f4f9f4] py-32">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-24 items-center">
         {/* LEFT – PHONES */}
-        <div className="relative h-full min-h-[50vh] hidden lg:block">
-          <img
+        <motion.div className="relative h-full min-h-[50vh] hidden lg:block">
+          <motion.img
+            initial={{ translateY: 100, opacity: 0 }}
+            animate={{ translateY: 0, opacity: 1 }}
+            transition={{ duration: 0.75, ease: "easeOut" }}
             src="/currencies/curr-phone1.png"
             alt="Currency app preview"
             className="drop-shadow-2xl absolute left-1/4 -bottom-25 z-10"
           />
-          <img
+          <motion.img
+            initial={{ translateY: 50, opacity: 0 }}
+            animate={{ translateY: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
             src="/currencies/curr-phone2.png"
             alt="Currency app preview"
             className="drop-shadow-2xl absolute -right-1/9 bottom-[18%]"
           />
-        </div>
+        </motion.div>
 
         {/* RIGHT – CONTENT */}
         <div className="relative inline-flex items-center flex-col">

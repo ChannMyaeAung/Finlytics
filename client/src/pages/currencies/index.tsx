@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import CurrencyContents from "./Content";
 import CurrencyHero from "./CurrencyHero";
 
@@ -6,6 +7,7 @@ const CurrenciesPage = () => {
     <section id="Currencies Page">
       <CurrencyHero />
       <CurrencyContents />
+      <Footer />
     </section>
   );
 };
