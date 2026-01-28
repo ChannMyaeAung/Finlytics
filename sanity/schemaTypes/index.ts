@@ -1,7 +1,6 @@
 import bankConnectionContents from './bankConnectionContents'
 import currencies from './currencies'
-import post from './post'
-
+import hero from './hero'
 import bankConnections from './bankConnections'
 
-export const schemaTypes = [post, bankConnections, currencies, bankConnectionContents]
+export const schemaTypes = [hero, bankConnections, currencies, bankConnectionContents]

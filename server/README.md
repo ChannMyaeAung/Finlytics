@@ -1,4 +1,16 @@
-Commands to Run for local development:
+# Finlytics Server
 
-1. pnpm init
-2. pnpm add express @types/express mongoose nodemon ts-node typescript
+Express + TypeScript API for Finlytics.
+
+## Setup
+
+1. Install deps: `pnpm install`
+2. Create `.env.local` (dev) or `.env` (prod) with:
+   - `MONGODB_URI=...`
+   - `PORT=5000`
+   - `EXCHANGE_RATE_API_KEY=...` (optional)
+3. Run: `pnpm dev`
+
+## Scripts
+
+- `pnpm dev` — start API with nodemon + ts-node

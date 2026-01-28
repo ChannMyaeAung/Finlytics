@@ -1,0 +1,80 @@
+export const HERO_PAGE_QUERY = `
+*[_type == "heroPage"][0]{
+  title,
+
+  heroIntro{
+    headline,
+    subheading,
+    ctaLabel,
+    ctaUrl,
+    ipadImage,
+    phoneImage
+  },
+
+  dataEntry{
+    title,
+    items[]{
+      title,
+      description,
+      image,
+      linkLabel,
+      linkUrl
+    }
+  },
+
+  appsAccess{
+    mobileTitle,
+    mobileBadges[]{
+      store,
+      badgeIcon,
+      labelImage,
+      url,
+      caption
+    },
+    mobileDirectLink{
+      label,
+      url
+    },
+    webTitle,
+    webButtons[]{
+      provider,
+      label,
+      icon,
+      url
+    },
+    webSignupLink{
+      label,
+      url
+    }
+  },
+
+  moneyFlows{
+    title,
+    tabs[]{
+      id,
+      label,
+      phoneImage,
+      tabletImage,
+      description,
+      ctaLabel,
+      ctaUrl
+    }
+  },
+
+  testimonials{
+    title,
+    backgroundImage,
+    rows[]{
+      direction,
+      items[]{
+        name,
+        date,
+        source,
+        avatar,
+        text,
+        stars
+      }
+    }
+  }
+}
+`;

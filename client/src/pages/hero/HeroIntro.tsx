@@ -3,12 +3,12 @@ import React from "react";
 
 const HeroIntro = () => {
   return (
-    <section className="bg-[#f9f9f3] dark:bg-black overflow-hidden h-[70vh] md:h-full ">
+    <section className="bg-[#f9f9f3] dark:bg-black overflow-hidden h-full min-h-[70vh] md:h-full ">
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-16">
           {/* LEFT CONTENT */}
           <div className="items-center flex flex-col text-center">
-            <h1 className="lg:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
+            <h1 className="md:text-[3.5rem] lg:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
               Track all
               <br />
               your cards
@@ -43,6 +43,7 @@ const HeroIntro = () => {
               className="
                 absolute
                 -top-40
+                md:top-40
                 sm:top-20
                 w-[80vw]
                 sm:max-w-224.75
@@ -54,8 +55,10 @@ const HeroIntro = () => {
                 scale-100
                 mt-25
                 sm:-mt-24
+                md:-mt-50
                 -left-38
                 sm:left-[4vw]
+                md:-left-10
                 sm:z-10
                 sm:drop-shadow-2xl
               "
@@ -68,15 +71,19 @@ const HeroIntro = () => {
               className="
                 absolute
                 top-30
+                md:-top-11
                 sm:top-[-11%]
                 -left-8
                 sm:left-1/2
+                md:left-25
+                lg:left-20
                 sm:w-[50vw]
                 rotate-x-0
                 rotate-y-0
                 rotate-z-0
                 w-[90vw]
                 scale-140
+                lg:scale-110
                 sm:scale-3d
                 z-20
                 drop-shadow-2xl

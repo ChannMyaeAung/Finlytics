@@ -7,8 +7,8 @@ export default function AppsAccessSection() {
           <h3 className="text-lg font-medium tracking-wider text-gray-800 pb-12">
             Mobile apps
           </h3>
-          <div className="flex items-center flex-col justify-center gap-4 flex-wrap">
-            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%]">
+          <div className="flex items-center flex-col justify-center gap-4 md:flex-row flex-wrap">
+            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%] md:w-auto">
               <a href="#" className="flex items-center justify-center w-full">
                 <img
                   src="/badges/apple.png"
@@ -29,7 +29,7 @@ export default function AppsAccessSection() {
               </a>
             </div>
 
-            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%]">
+            <div className="bg-black px-3 py-1.5 rounded-sm w-[80%] md:w-auto">
               <a href="#" className="flex items-center justify-center w-full">
                 <img
                   src="/badges/playstore.png"
@@ -69,17 +69,17 @@ export default function AppsAccessSection() {
           </h3>
 
           <div className="flex justify-center gap-4 flex-wrap">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold shadow-2xl w-full justify-center">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold shadow-2xl w-full md:w-auto justify-center">
               <img src="/badges/apple.png" alt="apple logo" className="h-4" />
               Log in with Apple
             </button>
 
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-gray-300 text-sm font-semibold shadow-lg w-full justify-center">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-gray-300 text-sm font-semibold shadow-lg w-full md:w-auto justify-center">
               <img src="/badges/google.png" alt="google logo" className="h-4" />
               Log in with Google
             </button>
 
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#007aff] text-white text-sm font-semibold shadow-lg w-full justify-center">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#007aff] text-white text-sm font-semibold shadow-lg w-full md:w-auto justify-center">
               <img
                 src="/badges/facebook.png"
                 alt="facebook logo"

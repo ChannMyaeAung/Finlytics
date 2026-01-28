@@ -20,11 +20,11 @@ const CurrencyConverter = () => {
   return (
     <div className="bg-[#daeaf2] p-8 grid grid-cols-2 gap-4 max-w-xl">
       {/* FROM */}
-      <div className="relative inline-flex items-center">
+      <div className="relative inline-flex items-center w-25 md:w-full text-nowrap">
         <select
           value={from}
           onChange={(e) => setFrom(e.target.value)}
-          className="p-3 rounded border bg-white appearance-none"
+          className="p-3 rounded border bg-white overflow-hidden w-full appearance-none backdrop-blur-md"
         >
           {symbols.map((c) => (
             <option key={c.code} value={c.code}>
@@ -36,11 +36,11 @@ const CurrencyConverter = () => {
       </div>
 
       {/* TO */}
-      <div className="relative inline-flex items-center">
+      <div className="relative inline-flex items-center w-25 md:w-full text-nowrap">
         <select
           value={to}
           onChange={(e) => setTo(e.target.value)}
-          className="p-3 rounded border bg-white appearance-none"
+          className="p-3 rounded border bg-white overflow-hidden w-full appearance-none backdrop-blur-md"
         >
           {symbols.map((c) => (
             <option key={c.code} value={c.code}>
@@ -52,22 +52,22 @@ const CurrencyConverter = () => {
       </div>
 
       {/* AMOUNT */}
-      <div className="w-full relative inline-flex items-center">
+      <div className="md:w-full relative inline-flex items-center w-25">
         <input
           type="text"
           value={amount}
           onChange={(e) => setAmount(parseInt(e.target.value))}
-          className="p-3 rounded border bg-white"
+          className="p-3 rounded border w-full bg-white"
         />
       </div>
 
-      <div>
+      <div className="w-25 relative inline-flex items-center md:w-full">
         {/* RESULT */}
         <input
           type="text"
           readOnly
           value={data?.result ? data.result.toFixed(2) : ""}
-          className="p-3 rounded border bg-white"
+          className="p-3 rounded border w-full bg-white"
         />
       </div>
     </div>
