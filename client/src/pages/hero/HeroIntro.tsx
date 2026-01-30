@@ -1,46 +1,52 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { urlFor } from "@/lib/sanity";
+import { PortableText, type PortableTextBlock } from "@portabletext/react";
+import type { SanityImageSource } from "@sanity/image-url";
+import { NavLink } from "react-router-dom";
 
-const HeroIntro = () => {
+type HeroIntroData = {
+  headline?: PortableTextBlock[];
+  subheading?: PortableTextBlock[];
+  ctaLabel?: string;
+  ctaUrl?: string;
+  ipadImage?: SanityImageSource;
+  phoneImage?: SanityImageSource;
+};
+
+const HeroIntro = ({ data }: { data?: HeroIntroData }) => {
   return (
     <section className="bg-[#f9f9f3] dark:bg-black overflow-hidden h-full min-h-[70vh] md:h-full ">
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className="max-w-7xl mx-auto px-6 py-8 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-16">
           {/* LEFT CONTENT */}
-          <div className="items-center flex flex-col text-center">
-            <h1 className="md:text-[3.5rem] lg:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
-              Track all
-              <br />
-              your cards
-              <br />
-              and cash
-              <br />
-              <i>in one place.</i>
-            </h1>
+          <div className="items-center justify-start flex flex-col text-center">
+            <div className="md:text-[3.5rem] lg:text-[5rem] text-4xl font-extrabold leading-[1em] text-gray-900 dark:text-white/80">
+              {data?.headline && <PortableText value={data.headline} />}
+            </div>
 
-            <p className="mt-6 max-w-md text-sm md:text-base text-gray-600 dark:text-white/80">
-              Connect your financial accounts, or enter expenses using our quick
-              and slick <strong>Finlytics apps</strong>. Toshl helps you with
-              the financial means. So you can{" "}
-              <strong>focus on the goals.</strong>
-            </p>
+            <div className="mt-6 max-w-md text-sm md:text-base text-gray-600 dark:text-white/80">
+              {data?.subheading && <PortableText value={data.subheading} />}
+            </div>
 
-            <Button
-              variant={"outline"}
-              size={"lg"}
-              className="mt-10 px-10 py-8 rounded-full bg-[#006555] text-white font-semibold hover:bg-emerald-800 transition cursor-pointer w-full max-w-110 text-lg shadow-2xl"
-            >
-              START FREE TRIAL
-            </Button>
+            {data?.ctaLabel && data?.ctaUrl && (
+              <Button
+                variant={"outline"}
+                size={"lg"}
+                className="mt-10 md:px-10 py-6 md:py-8 rounded-full bg-[#006555] text-white hover:bg-emerald-800 transition uppercase cursor-pointer w-full max-w-110 text-base md:text-lg shadow-2xl font-normal"
+              >
+                <NavLink to={data.ctaUrl}>{data.ctaLabel}</NavLink>
+              </Button>
+            )}
           </div>
 
           {/* RIGHT DEVICES */}
           <div className="relative md:h-130">
             {/* iPad */}
-            <img
-              src="ipad.png"
-              alt="iPad dashboard"
-              className="
+            {data?.ipadImage && (
+              <img
+                src={urlFor(data.ipadImage).url()}
+                alt="iPad dashboard"
+                className="
                 absolute
                 -top-40
                 md:top-40
@@ -62,13 +68,15 @@ const HeroIntro = () => {
                 sm:z-10
                 sm:drop-shadow-2xl
               "
-            />
+              />
+            )}
 
             {/* iPhone */}
-            <img
-              src="phone.png"
-              alt="iPhone app"
-              className="
+            {data?.phoneImage && (
+              <img
+                src={urlFor(data.phoneImage).url()}
+                alt="iPhone app"
+                className="
                 absolute
                 top-30
                 md:-top-11
@@ -88,7 +96,8 @@ const HeroIntro = () => {
                 z-20
                 drop-shadow-2xl
               "
-            />
+              />
+            )}
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { useBankConnectionContents } from "@/hooks/bank-connections/useBankConnectionContents";
 import { Loader2 } from "lucide-react";
 import { urlFor } from "@/lib/sanity";
+import { NavLink } from "react-router-dom";
 
 export type LinkType = {
   label: string;
@@ -109,15 +110,15 @@ const SectionComponent = ({
             </div>
             <div className="flex flex-col gap-4">
               {section.links?.map((link, idx) => (
-                <a
+                <NavLink
                   key={idx}
-                  href={link.url}
+                  to={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#b33556] font-medium hover:text-[#d94668] transition-colors text-base"
                 >
                   {link.label}
-                </a>
+                </NavLink>
               ))}
             </div>
             <span>{index}</span>

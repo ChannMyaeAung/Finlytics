@@ -13,7 +13,7 @@ const menus = [
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-accent dark:border-0 border-b border-gray-100 lg:min-h-16 h-full min-h-60 sm:min-h-45 w-full">
+    <header className="sticky top-0 z-50 bg-white dark:bg-accent dark:border-0 border-b border-gray-100 lg:min-h-16 h-full min-h-80 sm:min-h-45 w-full">
       {/* Navbar for Small screens and Tablets (below lg)*/}
       <div className="px-6 flex flex-col items-end lg:hidden justify-between">
         {/* Logo */}
@@ -25,12 +25,12 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <ModeToggle />
             <SignedOut>
-              <a
-                href="/auth"
+              <NavLink
+                to="/auth"
                 className="hidden sm:block px-6 py-2 bg-transparent font-bold rounded-full border border-black transition-all text-[11px] uppercase tracking-wider hover:border-pink-400 hover:text-pink-400 dark:border-white dark:hover:border-pink-400"
               >
                 Log in
-              </a>
+              </NavLink>
             </SignedOut>
             <SignedIn>
               <UserButton />
@@ -76,12 +76,12 @@ const Navbar = () => {
               end={menu.link === "/"}
               className={({ isActive }) =>
                 `
-                nav-tab flex items-center h-16 text-[11px] uppercase tracking-widest transition-colors
+                nav-tab flex items-center h-16 uppercase tracking-widest transition-colors
                 ${isActive ? "nav-tab--active " : "nav-tab--inactive "}
                 `
               }
             >
-              <span className="h-0 text-sm tracking-wider">{menu.name}</span>
+              <span className="h-0 text-xs! tracking-wider">{menu.name}</span>
             </NavLink>
           ))}
         </nav>
@@ -90,12 +90,12 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <ModeToggle />
           <SignedOut>
-            <a
-              href="/auth"
+            <NavLink
+              to="/auth"
               className="hidden sm:block px-6 py-2 bg-transparent font-bold rounded-full border border-black transition-all text-[11px] uppercase tracking-wider hover:border-pink-400 hover:text-pink-400 dark:border-white dark:hover:border-pink-400"
             >
               Log in
-            </a>
+            </NavLink>
           </SignedOut>
 
           <SignedIn>

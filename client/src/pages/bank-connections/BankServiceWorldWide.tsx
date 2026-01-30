@@ -8,6 +8,7 @@ import { urlFor } from "@/lib/sanity";
 import { ChevronDown, Loader2, SearchIcon } from "lucide-react";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { NavLink } from "react-router-dom";
 
 const countries = [
   "Argentina",
@@ -204,13 +205,13 @@ const BankServiceWorldWide = () => {
 
           {/* Footer */}
           <div className="pb-6 text-center border-t border-gray-300 mt-4 pt-4">
-            <a
-              href="#"
+            <NavLink
+              to="#"
               className="text-sm font-semibold text-[#b33556] transition-all hover:text-[#d94668]"
               onClick={handleShowAllBanks}
             >
               Full list of {bankCount} bank connections in {country}
-            </a>
+            </NavLink>
           </div>
 
           {/* Show all banks */}

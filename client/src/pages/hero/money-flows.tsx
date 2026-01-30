@@ -1,61 +1,29 @@
+import { urlFor } from "@/lib/sanity";
+import type { SanityImageSource } from "@sanity/image-url";
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-interface TabsType {
-  id: string;
-  label: string;
-  phone: string;
-  tablet: string;
-  description: string;
-}
+type MoneyFlowTab = {
+  id?: string;
+  label?: string;
+  phoneImage?: SanityImageSource;
+  tabletImage?: SanityImageSource;
+  description?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+};
 
-const TABS: TabsType[] = [
-  {
-    id: "river",
-    label: "River flow",
-    phone: "/flows/river-iphone.png",
-    tablet: "/flows/river-ipad.png",
-    description:
-      "Money flows in, but where does it go next? See your financial flows for the current month or over a longer time period. Set up budgets and saving accounts so it doesn't flow away too quickly.",
-  },
-  {
-    id: "monthly",
-    label: "Monthly overview",
-    phone: "/flows/monthly-iphone.png",
-    tablet: "/flows/monthly-ipad.png",
-    description:
-      "Instantly compare how much you spent to the time already passed in the month. Add your main budget into the mix and you'll know exactly how much you have Left to spend while stacking to your financial goals.",
-  },
-  {
-    id: "planning",
-    label: "Planning",
-    phone: "/flows/planning-iphone.png",
-    tablet: "/flows/planning-ipad.png",
-    description:
-      "Learn from the past, plan for the future. See your finances across a longer time period. Evaluate your past monthly balances, spending on individual categories and marvel in the growth of your net worth. Hopefully.",
-  },
-  {
-    id: "expenses",
-    label: "Expenses",
-    phone: "/flows/expenses-iphone.png",
-    tablet: "/flows/expenses-ipad.png",
-    description:
-      "Do you know where your money really goes each month? Break it down by category, tag and discover where your hidden money sinkhole lie.",
-  },
-  {
-    id: "locations",
-    label: "Locations",
-    phone: "/flows/locations-iphone.png",
-    tablet: "/flows/locations-ipad.png",
-    description:
-      "Put your spending on the map. But just for your eyes. Get the sum of your spending per store, restaurant or bar and find out why those waiters love you so much.",
-  },
-];
+type MoneyFlowsData = {
+  title?: string;
+  tabs?: MoneyFlowTab[];
+};
 
-const MoneyFlowsPage = () => {
-  const [activeTab, setActiveTab] = useState<string>("river");
+const MoneyFlowsPage = ({ data }: { data?: MoneyFlowsData }) => {
+  const tabs = data?.tabs || [];
+  const [activeTab, setActiveTab] = useState<string>(tabs[0]?.id || "");
 
   const activeIndex = Math.max(
-    TABS.findIndex((tab) => tab.id === activeTab),
+    tabs.findIndex((tab) => tab.id === activeTab),
     0,
   );
 
@@ -64,9 +32,7 @@ const MoneyFlowsPage = () => {
       <div className="max-w-6xl w-full mx-auto md:px-6 text-center">
         {/* Title */}
         <h2 className="font-serif text-3xl md:text-6xl text-gray-900 font-black">
-          Finlytics shows how your
-          <br />
-          money flows.
+          {data?.title}
         </h2>
 
         {/* Tabs */}
@@ -79,12 +45,12 @@ const MoneyFlowsPage = () => {
             "
         >
           <div className="flex w-full flex-wrap gap-6 px-4 md:px-0 justify-around">
-            {TABS.map((tab) => {
+            {tabs.map((tab) => {
               const isActive = tab.id === activeTab;
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => setActiveTab(tab.id || "")}
                   className={[
                     "relative py-4 border-0 font-normal uppercase tracking-normal transition-colors cursor-pointer text-xs w-full max-w-fit md:max-w-40",
                     isActive && "text-gray-900",
@@ -110,32 +76,43 @@ const MoneyFlowsPage = () => {
             className="flex transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
-            {TABS.map((tab) => (
+            {tabs.map((tab, i) => (
               <div
-                key={tab.id}
+                key={tab.id || i}
                 className="min-w-full overflow-hidden md:shrink-0 flex flex-col items-center gap-16 "
               >
-                <div className="relative h-120 md:h-full w-full flex items-end justify-center gap-12">
-                  <img
-                    src={tab.phone}
-                    alt={`${tab.label} mobile preview`}
-                    className="translate-y-4 self-center absolute -left-10 right-0 -top-3 z-20 drop-shadow-xs scale-75 md:scale-100 md:static"
-                    loading="lazy"
-                  />
-                  <img
-                    src={tab.tablet}
-                    alt={`${tab.label} tablet preview`}
-                    className="drop-shadow-xs absolute left-10 z-10 scale-120 md:scale-100 md:static"
-                    loading="lazy"
-                  />
+                <div className="relative h-auto min-h-120 sm:min-h-120 md:h-full container mx-auto flex items-end justify-center gap-0 md:gap-12">
+                  {tab.phoneImage && (
+                    <div className="absolute left-1/11 bottom-5 z-20 -translate-x-1/6 w-40 sm:w-48 md:translate-x-0 md:top-auto md:static md:w-auto self-center drop-shadow-xs">
+                      <img
+                        src={urlFor(tab.phoneImage).url()}
+                        alt={`${tab.label} mobile preview`}
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  {tab.tabletImage && (
+                    <div className="absolute left-1/2 md:left-1/4 bottom-0 z-10 -translate-x-1/2 w-64 scale-120 md:scale-100 sm:w-72 md:h-full md:static md:translate-x-0 md:w-auto drop-shadow-xs">
+                      <img
+                        src={urlFor(tab.tabletImage).url()}
+                        alt={`${tab.label} tablet preview`}
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="w-full max-w-3xl text-center">
                   <p className="mt-6 text-sm md:text-lg font-medium leading-relaxed text-gray-600 px-2">
                     {tab.description}
                   </p>
-                  <button className="mt-8 text-lg cursor-pointer font-bold text-[#b33556] hover:underline">
-                    Find out more
-                  </button>
+                  {tab.ctaLabel && (
+                    <NavLink
+                      to={tab.ctaUrl || "#"}
+                      className="mt-8 text-lg inline-block cursor-pointer font-bold text-[#b33556] hover:underline"
+                    >
+                      {tab.ctaLabel}
+                    </NavLink>
+                  )}
                 </div>
               </div>
             ))}

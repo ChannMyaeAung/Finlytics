@@ -8,6 +8,7 @@ import {
   type PortableTextBlock,
 } from "@portabletext/react";
 import { urlFor } from "@/lib/sanity";
+import { NavLink } from "react-router-dom";
 
 interface CurrencyContentType {
   title: string;
@@ -76,15 +77,15 @@ const CurrencyContents = () => {
 
                 <div className="mt-6 flex flex-col gap-3 ">
                   {contentDoc.links?.map((link, i) => (
-                    <a
+                    <NavLink
                       key={i}
-                      href={link.url}
+                      to={link.url}
                       target="_blank"
                       rel="noreferrer"
                       className="text-[#b33556] font-medium hover:text-[#d94668] transition-colors"
                     >
                       {link.label}
-                    </a>
+                    </NavLink>
                   ))}
                 </div>
               </div>
