@@ -1,7 +1,7 @@
 # Finlytics
 
 Full-stack personal finance app with a React (Vite) client, Node/Express API, and Sanity Studio for content.
-I tried to make a clone of "toshl.com" site but integrated a finance management with tan-stack table for "budgeting" ./budgeting endpoint which makes use of MongoDB which can only be accessed only after logging in.
+I tried to make a renamed clone of "toshl.com" site (finlytics) but integrated a finance management with tan-stack table for "budgeting" ./budgeting endpoint which makes use of MongoDB which can only be accessed only after logging in.
 Authentication is all handled by Clerk.
 The remaining page contents are the same as "toshl.com"
 

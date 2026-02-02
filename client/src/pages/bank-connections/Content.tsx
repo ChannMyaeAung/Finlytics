@@ -121,7 +121,6 @@ const SectionComponent = ({
                 </NavLink>
               ))}
             </div>
-            <span>{index}</span>
           </div>
 
           {/* Image */}

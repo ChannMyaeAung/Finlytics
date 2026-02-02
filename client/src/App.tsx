@@ -10,6 +10,7 @@ import BankConnections from "./pages/bank-connections";
 import Footer from "./components/footer";
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 import CurrenciesPage from "./pages/currencies";
+import PricingPage from "./pages/pricing";
 
 // Protected routes
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -51,6 +52,7 @@ function App() {
             />
             <Route path="/bank-connections" element={<BankConnections />} />
             <Route path="/currencies" element={<CurrenciesPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </div>
