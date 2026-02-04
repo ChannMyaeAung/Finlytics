@@ -34,7 +34,7 @@ const HeroIntro = ({ data }: { data?: HeroIntroData }) => {
                 size={"lg"}
                 className="mt-10 md:px-10 py-6 md:py-8 rounded-full bg-[#006555] text-white hover:bg-emerald-800 transition uppercase cursor-pointer w-full max-w-110 text-base md:text-lg shadow-2xl font-normal"
               >
-                <NavLink to={data.ctaUrl}>{data.ctaLabel}</NavLink>
+                <NavLink to={"/auth"}>{data.ctaLabel}</NavLink>
               </Button>
             )}
           </div>

@@ -36,7 +36,6 @@ function App() {
               element={
                 <>
                   <Hero />
-                  <Footer />
                 </>
               }
             />
@@ -55,6 +54,7 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
     </ThemeProvider>

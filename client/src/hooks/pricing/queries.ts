@@ -27,5 +27,11 @@ export const PRICING_FEATURE_COMPARISON_QUERY = `*[_type == "pricing"][0]{
         medici{ status, note }
       }
     }
+  },
+  cta{
+    Image,
+    title,
+    buttonText,
+    url
   }
 }`;

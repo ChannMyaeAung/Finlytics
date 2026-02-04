@@ -116,5 +116,33 @@ export default defineType({
       title: 'Feature Comparison',
       type: 'featureComparison',
     }),
+
+    defineField({
+      name: 'cta',
+      title: 'Call to Action',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'Image',
+          title: 'Image',
+          type: 'image',
+        }),
+        defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+        }),
+        defineField({
+          name: 'buttonText',
+          title: 'Button Text',
+          type: 'string',
+        }),
+        defineField({
+          name: 'url',
+          title: 'URL',
+          type: 'string',
+        }),
+      ],
+    }),
   ],
 })

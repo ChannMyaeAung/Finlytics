@@ -11,6 +11,18 @@ export type PricingPageProps = {
   plans: PricingPlan[];
   billingPeriod: BillingPeriod[];
   featureComparison: FeatureComparison;
+  cta: {
+    Image?: {
+      _type: "image";
+      asset: {
+        _type: "reference";
+        _ref: string;
+      };
+    };
+    title: string;
+    buttonText: string;
+    url: string;
+  };
 };
 
 export type PricingPlan = {

@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import BankServiceWorldWide from "./BankServiceWorldWide";
 import Content from "./Content";
 
@@ -7,7 +6,6 @@ const BankConnections = () => {
     <section id="Bank-Connections">
       <BankServiceWorldWide />
       <Content />
-      <Footer />
     </section>
   );
 };
