@@ -23,6 +23,14 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (_req, res) => {
+  res.status(200).send("Finlytics API is running");
+});
+
+app.get("/health", (_req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 const mongoURI = process.env.MONGODB_URI ?? process.env.MONGO_URI;
 
 if (!mongoURI) {

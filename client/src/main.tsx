@@ -23,5 +23,5 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </ClerkProvider>
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );
