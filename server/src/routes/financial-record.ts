@@ -5,7 +5,7 @@ import {
   createFinancialRecord,
   updateFinancialRecord,
   deleteFinancialRecord,
-} from "../controllers/financial-record-controllers.ts";
+} from "../controllers/financial-record-controllers.js";
 
 const router: express.Router = express.Router();
 

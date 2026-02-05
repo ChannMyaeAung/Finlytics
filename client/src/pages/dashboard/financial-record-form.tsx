@@ -29,7 +29,7 @@ export const FinancialRecordForm = () => {
   const [transactionType, setTransactionType] = useState<"income" | "expense">(
     "expense",
   );
-  const { records, addRecord } = useFinancialRecords();
+  const { addRecord } = useFinancialRecords();
 
   const { user } = useUser();
 

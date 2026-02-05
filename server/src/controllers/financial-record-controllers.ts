@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import FinancialRecordModel from "../schema/financial-record.ts";
+import FinancialRecordModel from "../schema/financial-record.js";
 
 export async function getAllByUserId(req: Request, res: Response) {
   try {
@@ -47,7 +47,7 @@ export async function updateFinancialRecord(req: Request, res: Response) {
       newRecordBody,
       {
         new: true,
-      }
+      },
     );
 
     if (!record) {

@@ -1,6 +1,6 @@
 import { urlFor } from "@/lib/sanity";
 import type { SanityImageSource } from "@sanity/image-url";
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 type MoneyFlowTab = {

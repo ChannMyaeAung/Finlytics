@@ -2,7 +2,7 @@ import express from "express";
 import {
   convertCurrency,
   getCurrencySymbols,
-} from "../controllers/currency-controllers.ts";
+} from "../controllers/currency-controllers.js";
 
 const router: express.Router = express.Router();
 

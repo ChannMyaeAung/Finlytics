@@ -1,4 +1,3 @@
-import React from "react";
 import type { LinkType } from "../bank-connections/Content";
 import { useCurrenciesContents } from "@/hooks/currencies/useCurrenciesContents";
 import { Loader2 } from "lucide-react";

@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import type { Express } from "express";
 import mongoose from "mongoose";
-import financialRecordRouter from "./routes/financial-record.ts";
-import currencyRouter from "./routes/currency.ts";
+import financialRecordRouter from "./routes/financial-record.js";
+import currencyRouter from "./routes/currency.js";
 import cors from "cors";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
