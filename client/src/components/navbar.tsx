@@ -1,6 +1,5 @@
 // src/components/Navbar.jsx
 import { NavLink } from "react-router-dom";
-import { ModeToggle } from "./mode-toggle"; // Assuming you have this
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 const menus = [
@@ -23,7 +22,6 @@ const Navbar = () => {
           </span>
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <ModeToggle />
             <SignedOut>
               <NavLink
                 to="/auth"
@@ -88,7 +86,6 @@ const Navbar = () => {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <ModeToggle />
           <SignedOut>
             <NavLink
               to="/auth"
