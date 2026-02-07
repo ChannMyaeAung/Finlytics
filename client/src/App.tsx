@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
-import { ThemeProvider } from "./components/theme-provider";
+
 import { FinancialRecordProvider } from "./hooks/dashboard/financial-record-context";
 import Hero from "./pages/hero";
 import Navbar from "./components/navbar";
@@ -26,38 +26,36 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Router>
-        <div className="">
-          <Navbar />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                </>
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <FinancialRecordProvider>
-                    <Dashboard />
-                  </FinancialRecordProvider>
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/bank-connections" element={<BankConnections />} />
-            <Route path="/currencies" element={<CurrenciesPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/auth" element={<Auth />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <div className="">
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+              </>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <FinancialRecordProvider>
+                  <Dashboard />
+                </FinancialRecordProvider>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/bank-connections" element={<BankConnections />} />
+          <Route path="/currencies" element={<CurrenciesPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
