@@ -12,7 +12,7 @@ const menus = [
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-accent dark:border-0 border-b border-gray-100 lg:min-h-16 h-full min-h-80 sm:min-h-45 w-full">
+    <header className="relative top-0 z-50 bg-white dark:bg-accent dark:border-0 border-b border-gray-100 lg:min-h-16 h-full min-h-80 sm:min-h-45 w-full">
       {/* Navbar for Small screens and Tablets (below lg)*/}
       <div className="px-6 flex flex-col items-end lg:hidden justify-between">
         {/* Logo */}

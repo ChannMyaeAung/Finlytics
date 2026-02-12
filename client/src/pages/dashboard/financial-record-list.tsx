@@ -57,7 +57,8 @@ type DraftRecord = {
 };
 
 export const FinancialRecordList = () => {
-  const { records, updateRecord, deleteRecord } = useFinancialRecords();
+  const { records, isLoading, hasFetched, updateRecord, deleteRecord } =
+    useFinancialRecords();
 
   // Memoize data so the table only recalculates when records actually change.
   const data = useMemo(() => records ?? [], [records]);
@@ -87,6 +88,7 @@ export const FinancialRecordList = () => {
     const recordId = record._id ?? record.id;
     if (!recordId) return;
 
+    setEditingId(recordId);
     const currentType =
       record.transactionType ?? (record.amount >= 0 ? "income" : "expense");
 
@@ -365,6 +367,14 @@ export const FinancialRecordList = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="rounded-lg border bg-muted/20 px-4 py-10 text-center text-sm text-muted-foreground">
+        Fetching your records...
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="min-w-full text-sm">
@@ -405,7 +415,7 @@ export const FinancialRecordList = () => {
                 ))}
               </tr>
             ))
-          ) : (
+          ) : hasFetched ? (
             <tr>
               <td
                 className="py-6 text-center text-muted-foreground"
@@ -414,7 +424,7 @@ export const FinancialRecordList = () => {
                 No records yet.
               </td>
             </tr>
-          )}
+          ) : null}
         </tbody>
       </table>
     </div>

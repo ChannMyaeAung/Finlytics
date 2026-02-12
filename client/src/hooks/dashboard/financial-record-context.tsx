@@ -17,6 +17,8 @@ export const FinancialRecordProvider = ({
   children: ReactNode;
 }) => {
   const [records, setRecords] = useState<FinancialRecord[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
   const { user } = useUser();
 
   // Helper to normalize record structure (infer type from sign if missing)
@@ -30,7 +32,12 @@ export const FinancialRecordProvider = ({
   // function for fetching financial records by userId
   const fetchRecords = async () => {
     try {
-      if (!user) return;
+      setIsLoading(true);
+      if (!user) {
+        setRecords([]);
+        setHasFetched(true);
+        return;
+      }
       const response = await fetch(
         `${baseURL}/financial-records/getAllByUserID/${user?.id}`,
       );
@@ -38,9 +45,13 @@ export const FinancialRecordProvider = ({
         const records = await response.json();
         setRecords(records.map(normalizeRecord));
       }
+      setHasFetched(true);
     } catch (error) {
       console.error("Failed to fetch records:", error);
       toast.error("Failed to fetch records");
+      setHasFetched(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -132,6 +143,8 @@ export const FinancialRecordProvider = ({
 
   const contextValue: FinancialRecordContextType = {
     records,
+    isLoading,
+    hasFetched,
     addRecord,
     updateRecord,
     deleteRecord,

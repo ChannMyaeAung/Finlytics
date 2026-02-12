@@ -14,6 +14,8 @@ export interface FinancialRecord {
 
 export interface FinancialRecordContextType {
   records: FinancialRecord[];
+  isLoading: boolean;
+  hasFetched: boolean;
   addRecord: (record: FinancialRecord) => void;
   updateRecord: (
     id: string,
