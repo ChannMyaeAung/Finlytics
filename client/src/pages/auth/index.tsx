@@ -99,13 +99,16 @@ export default function Auth() {
         } else {
           // Email verification required — Clerk will handle via email
           setError(
-            "Please check your email to verify your account before signing in."
+            "Please check your email to verify your account before signing in.",
           );
         }
       }
     } catch (err: unknown) {
       const clerkError = err as { errors?: Array<{ message: string }> };
-      setError(clerkError.errors?.[0]?.message ?? "Authentication failed. Please try again.");
+      setError(
+        clerkError.errors?.[0]?.message ??
+          "Authentication failed. Please try again.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -120,13 +123,14 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 flex overflow-hidden">
+    <div className="md:min-h-screen bg-white font-sans text-slate-900 flex overflow-hidden">
       {/* Left Side: Brand & Value Prop */}
-      <div className="hidden lg:flex lg:w-1/2 bg-slate-950 relative overflow-hidden flex-col justify-between p-12 text-white">
-        {/* Abstract Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20">
-          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-emerald-500/20 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-500/20 blur-[120px] rounded-full" />
+      <div className="hidden lg:flex lg:w-1/2 bg-[#f0faf5] relative overflow-hidden flex-col justify-between p-12 text-gray-900">
+        {/* Subtle background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <TrendingUp className="absolute -right-12 -bottom-12 w-80 h-80 text-emerald-200/50" />
+          <div className="absolute top-[-20%] right-[-10%] w-[55%] h-[55%] bg-emerald-400/10 blur-[100px] rounded-full" />
+          <div className="absolute bottom-[-15%] left-[-5%] w-[40%] h-[40%] bg-emerald-300/10 blur-[80px] rounded-full" />
         </div>
 
         {/* Logo */}
@@ -135,11 +139,11 @@ export default function Auth() {
           animate={{ opacity: 1, y: 0 }}
           className="relative z-10 flex items-center gap-2"
         >
-          <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <div className="w-10 h-10 bg-emerald-800 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-800/20">
             <TrendingUp className="text-white w-6 h-6" />
           </div>
-          <span className="text-2xl font-bold tracking-tight">
-            Fin<span className="text-emerald-500 text-3xl">lytics</span>
+          <span className="text-2xl font-bold tracking-tight text-gray-900">
+            Fin<span className="text-emerald-800 text-3xl">lytics</span>
           </span>
         </motion.div>
 
@@ -149,22 +153,55 @@ export default function Auth() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-5xl font-bold leading-[1.1] mb-6"
+            className="text-5xl font-black leading-[1.1] mb-4 text-gray-900"
           >
-            Master your <span className="text-emerald-400">financial</span>{" "}
+            Master your{" "}
+            <span className="text-emerald-700">financial</span>{" "}
             future.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-slate-400 text-lg mb-12"
+            className="text-gray-500 text-base mb-8"
           >
-            Join 10,000+ users who use Finlytics to track, analyze, and optimize
-            their personal and business finances in real-time.
+            Join 10,000+ users who use Finlytics to track, analyze, and
+            optimize their personal and business finances in real-time.
           </motion.p>
 
-          <div className="space-y-6">
+          {/* Mock dashboard preview card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="bg-white rounded-2xl p-5 shadow-md border border-emerald-100 mb-8"
+          >
+            <p className="text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+              Monthly Overview
+            </p>
+            <div className="mt-3 grid grid-cols-3 gap-3">
+              <div>
+                <p className="text-xl font-bold text-gray-900">฿42,700</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Spent</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold text-emerald-700">+18%</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Savings</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold text-gray-900">12</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Active subs</p>
+              </div>
+            </div>
+            <div className="mt-4 flex gap-1.5 items-center">
+              <div className="h-1.5 rounded-full bg-emerald-600 flex-3" />
+              <div className="h-1.5 rounded-full bg-emerald-300 flex-1" />
+              <div className="h-1.5 rounded-full bg-gray-100 flex-1" />
+            </div>
+            <p className="text-[10px] text-gray-400 mt-1.5">60% of savings goal reached</p>
+          </motion.div>
+
+          <div className="space-y-5">
             {[
               {
                 icon: ShieldCheck,
@@ -179,17 +216,17 @@ export default function Auth() {
             ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1 }}
+                transition={{ delay: 0.45 + i * 0.1 }}
                 className="flex gap-4 items-start"
               >
-                <div className="mt-1 p-2 bg-white/5 rounded-lg border border-white/10">
-                  <item.icon className="w-5 h-5 text-emerald-400" />
+                <div className="mt-0.5 p-2 bg-emerald-50 rounded-lg border border-emerald-100 shrink-0">
+                  <item.icon className="w-4 h-4 text-emerald-700" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-100">{item.title}</h3>
-                  <p className="text-slate-400 text-sm">{item.desc}</p>
+                  <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
+                  <p className="text-gray-500 text-xs mt-0.5">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -201,12 +238,12 @@ export default function Auth() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="relative z-10 flex items-center gap-6 text-xs text-slate-500 font-mono uppercase tracking-widest"
+          className="relative z-10 flex items-center gap-6 text-xs text-gray-400 font-mono uppercase tracking-widest"
         >
           <span>© 2026 Finlytics</span>
-          <span className="w-1 h-1 bg-slate-700 rounded-full" />
+          <span className="w-1 h-1 bg-gray-300 rounded-full" />
           <span>Privacy Policy</span>
-          <span className="w-1 h-1 bg-slate-700 rounded-full" />
+          <span className="w-1 h-1 bg-gray-300 rounded-full" />
           <span>Terms of Service</span>
         </motion.div>
       </div>
