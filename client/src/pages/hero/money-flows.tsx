@@ -1,5 +1,6 @@
 import { urlFor } from "@/lib/sanity";
 import type { SanityImageSource } from "@sanity/image-url";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -31,18 +32,32 @@ const MoneyFlowsPage = ({ data }: { data?: MoneyFlowsData }) => {
     <section className="bg-white py-16" role="money-flow">
       <div className="max-w-6xl w-full mx-auto md:px-6 text-center">
         {/* Title */}
-        <h2 className="font-serif text-3xl md:text-6xl text-gray-900 font-black">
+        <motion.h2
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
+          className="font-serif text-3xl md:text-6xl text-gray-900 font-black"
+        >
           {data?.title}
-        </h2>
+        </motion.h2>
 
         {/* Tabs */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{
+            duration: 0.55,
+            ease: [0.22, 0.61, 0.36, 1],
+            delay: 0.15,
+          }}
           className="
-            relative mt-12 
+            relative mt-12
             before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2
             before:bottom-0 before:w-screen before:border-b before:border-gray-200
             before:pointer-events-none
-            "
+          "
         >
           <div className="flex w-full flex-wrap gap-6 px-4 md:px-0 justify-around">
             {tabs.map((tab) => {
@@ -53,22 +68,30 @@ const MoneyFlowsPage = ({ data }: { data?: MoneyFlowsData }) => {
                   onClick={() => setActiveTab(tab.id || "")}
                   className={[
                     "relative py-4 border-0 font-normal uppercase tracking-normal transition-colors cursor-pointer text-xs w-full max-w-fit md:max-w-40",
-                    isActive && "text-gray-900",
+                    isActive ? "text-gray-900" : "text-gray-400 hover:text-gray-700",
                   ].join(" ")}
                 >
                   <span className="text-xs! whitespace-nowrap">
                     {tab.label}
                   </span>
 
-                  {/* Underline */}
+                  {/* Animated underline slides between tabs via layoutId */}
                   {isActive && (
-                    <span className="absolute left-0 right-0 -bottom-px  h-0.75 bg-[#b33556]" />
+                    <motion.span
+                      layoutId="tab-underline"
+                      className="absolute left-0 right-0 -bottom-px h-0.75 bg-[#b33556]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
                   )}
                 </button>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel */}
         <div className="relative md:mt-20 overflow-hidden">
@@ -101,19 +124,32 @@ const MoneyFlowsPage = ({ data }: { data?: MoneyFlowsData }) => {
                     </div>
                   )}
                 </div>
-                <div className="w-full max-w-3xl text-center">
-                  <p className="mt-6 text-sm md:text-lg font-medium leading-relaxed text-gray-600 px-2">
-                    {tab.description}
-                  </p>
-                  {tab.ctaLabel && (
-                    <NavLink
-                      to={tab.ctaUrl || "#"}
-                      className="mt-8 text-lg inline-block cursor-pointer font-bold text-[#b33556] hover:underline"
+
+                {/* Tab description + CTA — fades when tab changes */}
+                <AnimatePresence mode="wait">
+                  {tab.id === activeTab && (
+                    <motion.div
+                      key={tab.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="w-full max-w-3xl text-center"
                     >
-                      {tab.ctaLabel}
-                    </NavLink>
+                      <p className="mt-6 text-sm md:text-lg font-medium leading-relaxed text-gray-600 px-2">
+                        {tab.description}
+                      </p>
+                      {tab.ctaLabel && (
+                        <NavLink
+                          to={tab.ctaUrl || "#"}
+                          className="mt-8 text-lg inline-block cursor-pointer font-bold text-[#b33556] hover:underline"
+                        >
+                          {tab.ctaLabel}
+                        </NavLink>
+                      )}
+                    </motion.div>
                   )}
-                </div>
+                </AnimatePresence>
               </div>
             ))}
           </div>

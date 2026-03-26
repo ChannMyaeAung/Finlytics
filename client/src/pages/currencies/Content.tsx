@@ -8,6 +8,7 @@ import {
 } from "@portabletext/react";
 import { urlFor } from "@/lib/sanity";
 import { NavLink } from "react-router-dom";
+import { motion } from "motion/react";
 
 interface CurrencyContentType {
   title: string;
@@ -32,7 +33,6 @@ const CurrencyContents = () => {
 
   const fetchedContents = (data || []) as CurrencyContentType[];
 
-  // Add spaces between each paragraphs
   const portableTextComponents: PortableTextComponents = {
     block: {
       normal: ({ children }) => <p className="my-4 last:mb-0">{children}</p>,
@@ -49,16 +49,23 @@ const CurrencyContents = () => {
 
       {fetchedContents.map((contentDoc, idx) => {
         const isReversed = idx % 2 !== 0;
+        const textInitialX = isReversed ? 40 : -40;
+        const imageInitialX = isReversed ? -40 : 40;
+
         return (
           <div
             key={idx}
             className={`${isReversed ? "bg-[#f4f9f4]" : "bg-white"} pt-8 overflow-hidden`}
           >
             <div
-              className={`max-w-7xl w-full mx-auto px-6 flex flex-col md:flex-row  justify-center items-center gap-24 relative h-full min-h-200 ${isReversed ? "md:flex-row-reverse" : ""} `}
+              className={`max-w-7xl w-full mx-auto px-6 flex flex-col md:flex-row justify-center items-center gap-24 relative h-full min-h-200 ${isReversed ? "md:flex-row-reverse" : ""}`}
             >
-              {/* Contents - (First 2 contents to be self-start and last 2 contents to be self-center*/}
-              <div
+              {/* Text content */}
+              <motion.div
+                initial={{ opacity: 0, x: textInitialX }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
                 className={`text-left w-full max-w-lg pb-8 md:pb-0 ${idx < 2 ? "self-start" : "self-center"}`}
               >
                 <h1
@@ -74,7 +81,7 @@ const CurrencyContents = () => {
                   />
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3 ">
+                <div className="mt-6 flex flex-col gap-3">
                   {contentDoc.links?.map((link, i) => (
                     <NavLink
                       key={i}
@@ -87,31 +94,39 @@ const CurrencyContents = () => {
                     </NavLink>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Images */}
+              {/* Primary Image */}
               {contentDoc.Image && (
-                <div
+                <motion.div
+                  initial={{ opacity: 0, x: imageInitialX }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.75, ease: "easeOut", delay: 0.1 }}
                   className={`flex justify-center relative w-full min-h-25 max-h-full h-full md:h-auto md:static ${idx === 2 ? "max-h-65" : ""}`}
                 >
-                  {/* Each content section will have its own styles for images */}
                   <img
                     src={urlFor(contentDoc.Image).url()}
                     alt={contentDoc.title}
                     className={`max-w-md w-full h-auto md:relative object-contain max-h-130 md:max-h-150 ${idx === 0 ? "md:min-w-0 md:bottom-0 absolute max-h-100! left-0 -bottom-40 md:left-15" : idx === 1 ? "-bottom-70 absolute md:top-0 md:-left-30 -top-15 scale-110 md:scale-100 " : idx === 2 ? "" : idx === 3 ? "absolute md:-left-45 max-w-xl! md:scale-150 scale-120 -top-10 md:top-0" : ""}`}
                   />
-                </div>
+                </motion.div>
               )}
 
               {/* Secondary Image Icon */}
               {contentDoc.SecondaryImage && (
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                >
                   <img
                     src={urlFor(contentDoc.SecondaryImage).url()}
                     alt={`${contentDoc.title} secondary`}
-                    className={` w-[20vw] min-w-17.5 max-w-38.25 absolute h-auto object-contain ${idx === 0 ? "md:bottom-5 md:w-[15vw] md:left-1/8 bottom-[21%] left-1/9" : "md:bottom-5 md:right-15 max-w-53.25 right-5 bottom-[27%]"}`}
+                    className={`w-[20vw] min-w-17.5 max-w-38.25 absolute h-auto object-contain ${idx === 0 ? "md:bottom-5 md:w-[15vw] md:left-1/8 bottom-[21%] left-1/9" : "md:bottom-5 md:right-15 max-w-53.25 right-5 bottom-[27%]"}`}
                   />
-                </div>
+                </motion.div>
               )}
             </div>
           </div>

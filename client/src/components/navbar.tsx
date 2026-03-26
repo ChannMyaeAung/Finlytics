@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import { NavLink } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { motion, AnimatePresence } from "motion/react";
 
 const menus = [
   { name: "Personal Finance App", link: "/" },

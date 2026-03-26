@@ -1,7 +1,8 @@
 import { useUser } from "@clerk/clerk-react";
+import { motion } from "motion/react";
+import { TrendingUp, Wallet, PiggyBank } from "lucide-react";
 import { FinancialRecordForm } from "./financial-record-form";
 import { FinancialRecordList } from "./financial-record-list";
-import { TrendingUp, Wallet, PiggyBank } from "lucide-react";
 
 const quickStats = [
   {
@@ -27,9 +28,15 @@ const quickStats = [
 export const Dashboard = () => {
   const { user } = useUser();
   return (
-    <section className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white text-slate-900 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 dark:text-slate-50">
+    <section className="min-h-screen bg-linear-to-b from-slate-50 via-white to-white text-slate-900 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 dark:text-slate-50">
       <div className="w-full max-w-5xl mx-auto px-6 py-12 space-y-10">
-        <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-fuchsia-50/60 to-indigo-50/60 p-8 shadow-xl dark:border-white/5 dark:from-fuchsia-500/20 dark:via-slate-900 dark:to-slate-900">
+        {/* Welcome hero */}
+        <motion.section
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="rounded-3xl border border-slate-200 bg-linear-to-br from-white via-fuchsia-50/60 to-indigo-50/60 p-8 shadow-xl dark:border-white/5 dark:from-fuchsia-500/20 dark:via-slate-900 dark:to-slate-900"
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-pink-600 dark:text-fuchsia-200">
             Welcome back, {user?.firstName ?? "financier"}
           </p>
@@ -42,19 +49,32 @@ export const Dashboard = () => {
             transactions.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <button className="rounded-full bg-slate-900 px-6 py-2 text-sm font-semibold text-white shadow hover:bg-slate-800 dark:bg-white dark:text-slate-900">
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="rounded-full bg-slate-900 px-6 py-2 text-sm font-semibold text-white shadow hover:bg-slate-800 dark:bg-white dark:text-slate-900"
+            >
               Add a new record
-            </button>
-            <button className="rounded-full border border-slate-300 px-6 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 dark:border-white/40 dark:text-white/90 dark:hover:border-white">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="rounded-full border border-slate-300 px-6 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 dark:border-white/40 dark:text-white/90 dark:hover:border-white"
+            >
               View trends
-            </button>
+            </motion.button>
           </div>
-        </section>
+        </motion.section>
 
+        {/* Quick stats — staggered */}
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {quickStats.map(({ label, value, change, icon: Icon }) => (
-            <article
+          {quickStats.map(({ label, value, change, icon: Icon }, i) => (
+            <motion.article
               key={label}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 + i * 0.1 }}
+              whileHover={{ y: -4, boxShadow: "0 12px 28px -6px rgba(0,0,0,0.12)" }}
               className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg dark:border-white/5 dark:bg-white/5"
             >
               <div className="flex items-center justify-between">
@@ -69,12 +89,18 @@ export const Dashboard = () => {
               <p className="text-sm text-slate-500 dark:text-slate-400">
                 {change}
               </p>
-            </article>
+            </motion.article>
           ))}
         </section>
 
         <section className="flex flex-col gap-8">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-white/5 dark:bg-white/5">
+          {/* Log a record */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-white/5 dark:bg-white/5"
+          >
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
               Log a record
             </h2>
@@ -85,9 +111,15 @@ export const Dashboard = () => {
             <div className="mt-6">
               <FinancialRecordForm />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-white/5 dark:bg-white/5">
+          {/* Recent activity */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-white/5 dark:bg-white/5"
+          >
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
                 Recent activity
@@ -103,7 +135,7 @@ export const Dashboard = () => {
             <div className="mt-6">
               <FinancialRecordList />
             </div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </section>

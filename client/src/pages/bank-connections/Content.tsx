@@ -3,6 +3,7 @@ import { useBankConnectionContents } from "@/hooks/bank-connections/useBankConne
 import { Loader2 } from "lucide-react";
 import { urlFor } from "@/lib/sanity";
 import { NavLink } from "react-router-dom";
+import { motion } from "motion/react";
 
 export type LinkType = {
   label: string;
@@ -78,7 +79,6 @@ const SectionComponent = ({
   secondaryImage: BankConnectionContentsResponse["SecondaryImage"];
   isReversed: boolean;
 }) => {
-  // custom styles based on specific indices
   const customImageStyles = () => {
     switch (index) {
       case 0:
@@ -92,20 +92,29 @@ const SectionComponent = ({
     }
   };
 
+  // Text enters from the side the text is on; image enters from its side
+  const textInitialX = isReversed ? 40 : -40;
+  const imageInitialX = isReversed ? -40 : 40;
+
   return (
     <section
-      className={`py-24 overflow-hidden  border-t ${isReversed ? "bg-[#f9f9f3]" : "bg-white"}`}
+      className={`py-24 overflow-hidden border-t ${isReversed ? "bg-[#f9f9f3]" : "bg-white"}`}
     >
-      <div className={`max-w-6xl px-6 mx-auto`}>
+      <div className="max-w-6xl px-6 mx-auto">
         <div
-          className={`flex flex-col md:flex-row items-center gap-16  ${isReversed ? "md:flex-row-reverse" : ""}`}
+          className={`flex flex-col md:flex-row items-center gap-16 ${isReversed ? "md:flex-row-reverse" : ""}`}
         >
           {/* Text Content */}
-          <div className="">
+          <motion.div
+            initial={{ opacity: 0, x: textInitialX }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               {section.heading}
             </h2>
-            <div className="text-base text-gray-900/95 mb-8 ">
+            <div className="text-base text-gray-900/95 mb-8">
               <PortableText value={section.content} />
             </div>
             <div className="flex flex-col gap-4">
@@ -121,22 +130,24 @@ const SectionComponent = ({
                 </NavLink>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Image */}
           {image && (
-            <div
+            <motion.div
+              initial={{ opacity: 0, x: imageInitialX }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.75, ease: "easeOut", delay: 0.1 }}
               className={`flex justify-center w-full ${index === 2 ? "relative" : ""}`}
             >
-              {/* Primary Image */}
               <div className={index === 2 ? "relative z-10" : ""}>
                 <img
                   src={urlFor(image).url()}
                   alt={section.heading}
-                  className={`relative ${customImageStyles()} `}
+                  className={`relative ${customImageStyles()}`}
                 />
               </div>
-              {/* Secondary Image - Behind (only for index 2) */}
               {secondaryImage && index === 2 && (
                 <div className="absolute inset-0 flex justify-center items-center z-0 pointer-events-none">
                   <img
@@ -146,7 +157,7 @@ const SectionComponent = ({
                   />
                 </div>
               )}
-            </div>
+            </motion.div>
           )}
         </div>
       </div>

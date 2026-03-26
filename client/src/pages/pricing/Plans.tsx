@@ -20,16 +20,20 @@ const Plans = ({ data }: { data?: PricingPageProps }) => {
       </h2>
 
       {/* Plan Cards */}
-      <div className="grid md:grid-cols-2 gap-4 mb-12 ">
-        {data?.plans.map((plan) => (
-          <div
+      <div className="grid md:grid-cols-2 gap-4 mb-12">
+        {data?.plans.map((plan, i) => (
+          <motion.div
             key={plan.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.1 }}
+            whileHover={{ scale: 1.02, y: -3 }}
             onClick={() => setSelectedPlan(plan)}
             className={clsx(
-              "border relative rounded-sm px-8 py-4 text-center transition bg-[#f3fbff]",
+              "border relative rounded-sm px-8 py-4 text-center transition-colors bg-[#f3fbff] cursor-pointer",
               selectedPlan?.name === plan.name
                 ? "border-emerald-800 shadow-lg border-4"
-                : "border-gray-200",
+                : "border-gray-200 hover:border-emerald-300",
             )}
           >
             <h3 className="text-2xl md:text-4xl font-extrabold mb-4">
@@ -69,7 +73,7 @@ const Plans = ({ data }: { data?: PricingPageProps }) => {
                 </motion.svg>
               </motion.span>
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -80,15 +84,19 @@ const Plans = ({ data }: { data?: PricingPageProps }) => {
         </h3>
 
         <div className="grid md:grid-cols-2 gap-4 mb-12">
-          {data?.billingPeriod.map((p) => (
-            <div
+          {data?.billingPeriod.map((p, i) => (
+            <motion.div
               key={p.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: 0.2 + i * 0.1 }}
+              whileHover={{ scale: 1.02, y: -3 }}
               onClick={() => setSelectedBilling(p)}
               className={clsx(
-                "border relative rounded-sm px-8 py-4 text-center transition bg-[#f3fbff]",
+                "border relative rounded-sm px-8 py-4 text-center transition-colors bg-[#f3fbff] cursor-pointer",
                 selectedBilling?.label === p.label
                   ? "border-emerald-800 shadow-lg border-4"
-                  : "border-gray-200",
+                  : "border-gray-200 hover:border-emerald-300",
               )}
             >
               <p className="text-sm text-gray-500 mb-2">
@@ -99,7 +107,7 @@ const Plans = ({ data }: { data?: PricingPageProps }) => {
 
               <p className="text-xs text-gray-500 my-2">{p.billingNote}</p>
 
-              {p.savingsText && <p className=" font-medium">{p.savingsText}</p>}
+              {p.savingsText && <p className="font-medium">{p.savingsText}</p>}
 
               {selectedBilling?.label === p.label && (
                 <motion.span
@@ -126,16 +134,18 @@ const Plans = ({ data }: { data?: PricingPageProps }) => {
                   </motion.svg>
                 </motion.span>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
 
       {/* CTA */}
       <div className="text-center mt-12">
-        <Button className="bg-emerald-800 hover:bg-emerald-900 text-white p-8 rounded-full text-sm w-full font-medium max-w-sm">
-          GET FINLYTICS MEDICI
-        </Button>
+        <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+          <Button className="bg-emerald-800 hover:bg-emerald-900 text-white p-8 rounded-full text-sm w-full font-medium max-w-sm">
+            GET FINLYTICS MEDICI
+          </Button>
+        </motion.div>
       </div>
     </div>
   );

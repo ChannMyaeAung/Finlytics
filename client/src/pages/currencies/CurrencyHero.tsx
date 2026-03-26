@@ -7,6 +7,7 @@ const CurrencyHero = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row md:gap-24 items-center">
         {/* LEFT – PHONES */}
         <motion.div className="relative w-full h-full min-h-90 md:min-h-[50vh] block">
+          {/* Phone 1 — slides up from bottom */}
           <motion.img
             initial={{ translateY: 100, opacity: 0 }}
             animate={{ translateY: 0, opacity: 1 }}
@@ -15,6 +16,7 @@ const CurrencyHero = () => {
             alt="Currency app preview"
             className="drop-shadow-2xl absolute scale-150 md:scale-100 left-4 -bottom-2/3 md:left-1/4 md:-bottom-25 z-20 w-40 sm:w-48 md:w-auto"
           />
+          {/* Phone 2 — slides up slightly after */}
           <motion.img
             initial={{ translateY: 50, opacity: 0 }}
             animate={{ translateY: 0, opacity: 1 }}
@@ -27,26 +29,48 @@ const CurrencyHero = () => {
 
         {/* RIGHT – CONTENT */}
         <div className="relative inline-flex items-center flex-col">
-          <img
+          {/* Globe — slow spin */}
+          <motion.img
             src="/currencies/curr-globe.png"
             alt=""
             aria-hidden="true"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
             className="pointer-events-none absolute md:-top-1/5 md:right-1/4 -top-1/5 scale-50 md:scale-100 z-10"
           />
-          <h1 className="font-serif text-3xl md:text-5xl text-center font-black text-gray-900 z-20">
+
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: "easeOut", delay: 0.15 }}
+            className="font-serif text-3xl md:text-5xl text-center font-black text-gray-900 z-20"
+          >
             <span className="md:text-7xl text-5xl">Currencies</span> <br />
             <span className="italic">of the world</span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-15 text-base md:text-lg font-normal w-full text-center mx-auto text-gray-900 max-w-md">
+          {/* Stat paragraph */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            className="mt-15 text-base md:text-lg font-normal w-full text-center mx-auto text-gray-900 max-w-md"
+          >
             We have <strong className="text-3xl font-medium">305</strong> of
             those in the Toshl apps. Fiat, crypto, precious metals, you name it.
             Only the freshest exchange rates!
-          </p>
+          </motion.p>
 
-          <div className="mt-12">
+          {/* Converter */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.45 }}
+            className="mt-12"
+          >
             <CurrencyConverter />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

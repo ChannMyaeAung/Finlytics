@@ -1,5 +1,6 @@
 import { urlFor } from "@/lib/sanity";
 import type { SanityImageSource } from "@sanity/image-url";
+import { motion } from "motion/react";
 import { NavLink } from "react-router-dom";
 
 type Badge = {
@@ -32,14 +33,30 @@ export default function AppsAccessSection({ data }: { data?: AppsAccessData }) {
       <div className="max-w-3xl mx-auto px-6 text-center space-y-8">
         {/* Mobile Apps */}
         <div className="">
-          <h3 className="text-lg font-medium tracking-wider text-gray-800 pb-12">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
+            className="text-lg font-medium tracking-wider text-gray-800 pb-12"
+          >
             {data?.mobileTitle}
-          </h3>
+          </motion.h3>
           <div className="flex items-center flex-col justify-center gap-4 md:flex-row flex-wrap max-w-3xs md:container mx-auto">
             {data?.mobileBadges?.map((b, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="bg-black px-3 py-1.5 rounded-sm w-[80%] md:w-auto"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 0.61, 0.36, 1],
+                  delay: i * 0.08,
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-black px-3 py-1.5 rounded-sm w-[80%] md:w-auto cursor-pointer"
               >
                 <NavLink
                   to={b.url || "#"}
@@ -52,7 +69,6 @@ export default function AppsAccessSection({ data }: { data?: AppsAccessData }) {
                       className="h-5 mr-1"
                     />
                   )}
-
                   <div className="flex items-start flex-col">
                     <span className="text-white text-[10px]">{b.caption}</span>
                     {b.labelImage && (
@@ -64,12 +80,18 @@ export default function AppsAccessSection({ data }: { data?: AppsAccessData }) {
                     )}
                   </div>
                 </NavLink>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {data?.mobileDirectLink?.label && (
-            <p className="text-sm text-gray-600 my-4">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-sm text-gray-600 my-4"
+            >
               or{" "}
               <NavLink
                 to={data.mobileDirectLink.url || "#"}
@@ -77,38 +99,71 @@ export default function AppsAccessSection({ data }: { data?: AppsAccessData }) {
               >
                 {data.mobileDirectLink.label}
               </NavLink>
-            </p>
+            </motion.p>
           )}
         </div>
 
         {/* Web App */}
         <div className="space-y-6">
-          <h3 className="text-sm font-bold tracking-wider text-gray-800">
+          <motion.h3
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
+            className="text-sm font-bold tracking-wider text-gray-800"
+          >
             {data?.webTitle}
-          </h3>
+          </motion.h3>
 
-          {/* Login with either Apple, Google or Facebook */}
+          {/* Social login buttons */}
           <div className="flex flex-col md:flex-row justify-center gap-4 flex-wrap max-w-3xs md:container mx-auto">
             {data?.webButtons?.map((btn, i) => (
-              <NavLink
-                to={btn.url || "#"}
+              <motion.div
                 key={i}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold shadow-2xl w-auto justify-center ${btn.provider === "apple" ? "bg-black text-white" : btn.provider === "google" ? "bg-white text-gray-800" : btn.provider === "facebook" ? "bg-[#004db3] text-white" : "bg-gray-800"}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 0.61, 0.36, 1],
+                  delay: i * 0.08,
+                }}
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
               >
-                {btn.icon && (
-                  <img
-                    src={urlFor(btn.icon).url()}
-                    alt={`${btn.provider} logo`}
-                    className="h-4"
-                  />
-                )}
-                {btn.label}
-              </NavLink>
+                <NavLink
+                  to={btn.url || "#"}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold shadow-2xl w-auto justify-center ${
+                    btn.provider === "apple"
+                      ? "bg-black text-white"
+                      : btn.provider === "google"
+                        ? "bg-white text-gray-800"
+                        : btn.provider === "facebook"
+                          ? "bg-[#004db3] text-white"
+                          : "bg-gray-800"
+                  }`}
+                >
+                  {btn.icon && (
+                    <img
+                      src={urlFor(btn.icon).url()}
+                      alt={`${btn.provider} logo`}
+                      className="h-4"
+                    />
+                  )}
+                  {btn.label}
+                </NavLink>
+              </motion.div>
             ))}
           </div>
 
           {data?.webSignupLink?.label && (
-            <p className="text-lg text-gray-600">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="text-lg text-gray-600"
+            >
               or{" "}
               <NavLink
                 to={data.webSignupLink.url || "#"}
@@ -116,7 +171,7 @@ export default function AppsAccessSection({ data }: { data?: AppsAccessData }) {
               >
                 {data.webSignupLink.label}
               </NavLink>
-            </p>
+            </motion.p>
           )}
         </div>
       </div>
