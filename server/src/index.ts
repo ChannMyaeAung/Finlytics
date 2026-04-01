@@ -21,7 +21,24 @@ const port = process.env.PORT || 5000;
 // adds built-in middleware function that parses incoming requests with JSON payloads
 // populates req.body with the parsed obj so we can access posted JSON data
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((o) => o.trim());
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow server-to-server requests (no origin) and listed origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS: origin ${origin} not allowed`));
+      }
+    },
+    credentials: true,
+  }),
+);
 
 app.get("/", (_req, res) => {
   res.status(200).send("Finlytics API is running");
