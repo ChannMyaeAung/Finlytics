@@ -33,7 +33,8 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error(`CORS: origin ${origin} not allowed`));
+        console.warn(`CORS: blocked request from origin ${origin}`);
+        callback(null, false);
       }
     },
     credentials: true,
