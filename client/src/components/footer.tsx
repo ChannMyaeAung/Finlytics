@@ -1,5 +1,6 @@
 import { ChevronDown, TrendingUp } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { motion } from "motion/react";
 
 const footerLinks = [
   { name: "Blog", href: "#" },
@@ -26,11 +27,20 @@ const footerLinksThree = [
 const LanguageSelect = () => (
   <div className="relative inline-flex items-center">
     <select className="appearance-none text-white py-2.5 px-5 pr-9 rounded-md outline-none bg-white/10 border border-white/10 text-sm cursor-pointer hover:bg-white/15 transition-colors">
-      <option value="en" className="bg-[#15181a] text-white">English</option>
-      <option value="es" className="bg-[#15181a] text-white">Spanish</option>
-      <option value="fr" className="bg-[#15181a] text-white">French</option>
+      <option value="en" className="bg-[#15181a] text-white">
+        English
+      </option>
+      <option value="es" className="bg-[#15181a] text-white">
+        Spanish
+      </option>
+      <option value="fr" className="bg-[#15181a] text-white">
+        French
+      </option>
     </select>
-    <ChevronDown className="pointer-events-none absolute right-2.5 text-white/60" size={15} />
+    <ChevronDown
+      className="pointer-events-none absolute right-2.5 text-white/60"
+      size={15}
+    />
   </div>
 );
 
@@ -81,22 +91,35 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           {/* Logo + copyright + legal */}
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-emerald-800 rounded-lg flex items-center justify-center">
-                <TrendingUp className="text-white w-4 h-4" />
-              </div>
-              <span className="text-base font-bold tracking-tight text-white">
-                Fin<span className="text-emerald-500">lytics</span>
-              </span>
-            </div>
+            {/* Logo */}
+            <Link to={"/"}>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative z-10 flex items-center gap-2"
+              >
+                <div className="w-10 h-10 bg-emerald-800 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                  <TrendingUp className="text-white w-6 h-6" />
+                </div>
+                <span className="text-2xl text-white tracking-tight">
+                  Fin<span className="text-emerald-800 text-3xl">lytics</span>
+                </span>
+              </motion.div>
+            </Link>
             <p className="text-gray-600 text-xs">
               Copyright © 2026 Finlytics. All rights reserved.
             </p>
             <div className="flex gap-4">
-              <NavLink to="#" className="text-[#b33556] text-xs hover:text-[#d94668] transition-colors">
+              <NavLink
+                to="#"
+                className="text-[#b33556] text-xs hover:text-[#d94668] transition-colors"
+              >
                 Terms of Use
               </NavLink>
-              <NavLink to="#" className="text-[#b33556] text-xs hover:text-[#d94668] transition-colors">
+              <NavLink
+                to="#"
+                className="text-[#b33556] text-xs hover:text-[#d94668] transition-colors"
+              >
                 Privacy Policy
               </NavLink>
             </div>

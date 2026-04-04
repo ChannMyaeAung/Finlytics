@@ -16,6 +16,7 @@ import {
 import CurrenciesPage from "./pages/currencies";
 import PricingPage from "./pages/pricing";
 import Auth from "./pages/auth";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 // Protected routes
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -63,6 +64,7 @@ function App() {
           />
         </Routes>
         <Footer />
+        <ScrollToTopButton />
       </div>
     </Router>
   );

@@ -53,8 +53,6 @@ export const FinancialRecordForm = () => {
       paymentMethod: paymentMethod,
     };
 
-    console.log(newRecord);
-
     addRecord(newRecord);
     setDescription("");
     setAmount("");
@@ -116,7 +114,7 @@ export const FinancialRecordForm = () => {
 
               {/* Select */}
               <Field>
-                <FieldLabel>Cateogry</FieldLabel>
+                <FieldLabel>Category</FieldLabel>
                 <Select
                   value={category}
                   onValueChange={(value) => setCategory(value)}
